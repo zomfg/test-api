@@ -4,7 +4,13 @@
  *
  * @author johndoe
  */
-class AumStaticClient implements IAumClient {
-    //put your code here
+class AumStaticClient extends AbstractAumClient {
+    public function __construct() {
+
+    }
+
+    public function getPage($page) {
+        return null;
+    }
 }
 ?>
