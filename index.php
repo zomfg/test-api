@@ -7,5 +7,5 @@ function __autoload($name) {
     }
 }
 
-echo 'sup';
+echo 'sup not';
 ?>
