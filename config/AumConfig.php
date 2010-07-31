@@ -22,7 +22,7 @@ class AumConfig {
 
 
     public function __construct(){
-        $this->arrayConfig = parse_ini_file("/Users/dirk/Documents/AUM/API/test-api/config/config.ini");
+        $this->arrayConfig = parse_ini_file("config/config.ini");
     }
     
     /*
