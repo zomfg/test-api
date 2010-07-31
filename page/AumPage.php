@@ -23,12 +23,22 @@ class AumPage implements IAumPage{
     }
 
     /*
+     * @return string
+     */
+    public function getHtmlBody(){
+        return $this->htmlBody;
+    }
+    /*
      * @param string $htmlCode
      */
     public function setHtmlBody($htmlCode){
         $this->htmlBody  = $htmlCode;
     }
 
+
+    /*
+     * @param IAumParser $parser
+     */
     public function Parse(IAumParser $parser) {
         $parser->Parse($this);
     }

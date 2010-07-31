@@ -5,13 +5,19 @@
  */
 
 /**
- * Description of AumMailPage
+ * Description of AumMailParser
  *
  * @author dirk
  */
-class AumMailPage extends AumPage{
-    public function __construct() {
+class AumMailParser extends AumParser{
+
+    function __construct() {
         parent::__construct();
     }
+ 
+    public function Parse(AumChatPage $aumPage){
+
+    }
+
 }
 ?>

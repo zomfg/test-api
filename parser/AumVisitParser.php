@@ -5,13 +5,14 @@
  */
 
 /**
- * Description of AumMailPage
+ * Description of AumVisitParser
  *
  * @author dirk
  */
-class AumMailPage extends AumPage{
-    public function __construct() {
-        parent::__construct();
+class AumVisitParser  implements IAumParser {
+    function __construct() {
+        
     }
+    
 }
 ?>
