@@ -4,6 +4,7 @@
  * @author johndoe
  */
 interface IAumPage {
-    //put your code here
+    public function getURL();
+    public function Parse(IAumParser $parser);
 }
 ?>
