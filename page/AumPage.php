@@ -10,19 +10,20 @@
  * @author dirk
  */
 class AumPage implements IAumPage{
-    /*
+
+    /**
      * @var string
      */
     protected $htmlBody;
     
-    /*
+    /**
      * @param string $htmlCode
      */
     function __construct() {
         
     }
 
-    /*
+    /**
      * @return string
      */
     public function getHtmlBody(){
@@ -36,14 +37,14 @@ class AumPage implements IAumPage{
     }
 
 
-    /*
+    /**
      * @param IAumParser $parser
      */
     public function Parse(IAumParser $parser) {
         $parser->Parse($this);
     }
 
-    /*
+    /**
      * @return string
      */
     public function getURL() {

@@ -14,7 +14,10 @@ class AumChatParser  implements IAumParser{
 
     }
 
-    public function Parse(AumChatPage $aumPage){
+    /**
+     * @param AumChatPage $aumPage
+     */
+    public function parse(IAumPage $aumPage){
         
     }
 }

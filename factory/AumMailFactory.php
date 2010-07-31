@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-class AumMailFactory {
+class AumMailFactory extends AbstractAumFactory {
     function __construct() {
 
     }

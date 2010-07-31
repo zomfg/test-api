@@ -14,7 +14,10 @@ class AumBasketParser  implements IAumParser{
         
     }
 
-    public function Parse(AumBasketPage $aumPage){
+    /**
+     * @param AumBasketPage $aumPage
+     */
+    public function parse(IAumPage $aumPage){
 
     }
 }

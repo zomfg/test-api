@@ -10,22 +10,22 @@
  * @author dirk
  */
 class AumConfig {
-    /*
+    /**
      * @var array
      */
     private $arrayConfig = null;
 
-    /*
+    /**
      * @var Aumconfig
      */
     private static $config = null;
 
 
     public function __construct(){
-        $this->arrayConfig = parse_ini_file("config/config.ini");
+        $this->arrayConfig = parse_ini_file('config/config.ini', true);
     }
     
-    /*
+    /**
      * @return AumConfig
      */
     public static function Config(){
@@ -36,12 +36,12 @@ class AumConfig {
         return AumConfig::$config;
     }
 
-    /*
+    /**
      * @param AumPage $aumPage
-     * return string
+     * @return string
      */
     public function getUrl($aumPage){
-        return $this->arrayConfig[get_class($aumPage)];
+        return $this->arrayConfig['URLs'][get_class($aumPage)];
     }
     
 
