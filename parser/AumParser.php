@@ -15,7 +15,7 @@ abstract class AumParser implements IAumParser {
      */
     protected $dom;
 
-    function __construct() {
+    public function __construct() {
         $this->dom = new simple_html_dom();
     }
 

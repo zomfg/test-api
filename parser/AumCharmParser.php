@@ -10,7 +10,7 @@
  * @author dirk
  */
 class AumCharmParser  implements IAumParser {
-    function __construct() {
+    public function __construct() {
 
     }
 

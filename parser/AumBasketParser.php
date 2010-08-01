@@ -10,7 +10,7 @@
  * @author dirk
  */
 class AumBasketParser  implements IAumParser{
-    function __construct() {
+    public function __construct() {
         
     }
 

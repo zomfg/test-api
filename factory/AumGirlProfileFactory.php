@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-class AumProfileFactory {
+class AumGirlProfileFactory {
     function __construct() {
 
     }
@@ -18,14 +18,14 @@ class AumProfileFactory {
      * @return AumProfilePage
      */
     public function createPage(){
-        return new AumProfilePage();
+        return new AumGirlProfilePage();
     }
 
     /**
      * @return AumProfileParser
      */
     public function createParser(){
-        return new AumProfileParser();
+        return new AumGirlProfileParser();
     }
 }
 ?>
