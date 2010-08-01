@@ -15,48 +15,81 @@ class AumGirlProfilePage extends AumProfilePage {
     /**
      * @var integer
      */
-    private $visitsCounter;
+    private $visitsCounter = 0;
     /**
      * @var integer
      */
-    private $charmsCounter;
+    private $charmsCounter = 0;
     /**
      * @var integer
      */
-    private $basketsCounter;
+    private $basketsCounter = 0;
     /**
      * @var integer
      */
-    private $mailsCounter;
+    private $mailsCounter = 0;
     /**
      * @var integer
      */
-    private $bonus;
-    /**
-     * @var integer
-     */
-    private $visitsPoints;
-    /**
-     * @var integer
-     */
-    private $charmsPoints;
-    /**
-     * @var integer
-     */
-    private $basketsPoints;
-    /**
-     * @var integer
-     */
-    private $mailsPoints;
+    private $bonus = 0;
     /**
      * @var string 
      */
-    private $about;
+    private $about = '';
     /**
      *
      * @var string
      */
-    private $name;
+    private $name = '';
+    /**
+     * @var string
+     */
+    private $age = '';
+    /**
+     * @var string
+     */
+    private $location = '';
+    /**
+     * @var string
+     */
+    private $eyes = '';
+    /**
+     * @var string
+     */
+    private $hair = '';
+    /**
+     * @var string
+     */
+    private $measurements = '';
+    /**
+     * @var string
+     */
+    private $style = '';
+    /**
+     * @var string
+     */
+    private $origins = '';
+    /**
+     * @var string
+     */
+    private $signs = '';
+    /**
+     * @var string
+     */
+    private $job = '';
+    /**
+     * @var string
+     */
+    private $food = '';
+    /**
+     * @var string
+     */
+    private $alcohol = '';
+    /**
+     * @var string
+     */
+    private $smoke = '';
+    
     public function __construct() {
         parent::__construct();
     }
@@ -100,28 +133,28 @@ class AumGirlProfilePage extends AumProfilePage {
      * @return integer
      */
     public function getVisitsPoints() {
-        return $this->visitsPoints;
+        return $this->getVisitsCounter() * AumConfig::Config()->getVisitValue();
     }
 
     /**
      * @return integer
      */
     public function getCharmsPoints() {
-        return $this->charmsPoints;
+        return $this->getCharmsCounter() * AumConfig::Config()->getCharmValue();
     }
 
     /**
      * @return integer
      */
     public function getBasketsPoints() {
-        return $this->basketsPoints;
+        return $this->getBaskEtsCounter() * AumConfig::Config()->getBasketValue();
     }
 
     /**
      * @return integer
      */
     public function getMailsPoints() {
-        return $this->mailsPoints;
+        return $this->getMailsCounter() * AumConfig::Config()->getMailValue();
     }
 
     /**
@@ -148,7 +181,78 @@ class AumGirlProfilePage extends AumProfilePage {
     public function getName() {
         return $this->name;
     }
-
+    /**
+     * @return string
+     */
+    public function getAge() {
+        return $this->age;
+    }
+    /**
+     * @return string
+     */
+    public function getLocation() {
+        return $this->location;
+    }
+    /**
+     * @return string
+     */
+    public function getEyes() {
+        return $this->eyes;
+    }
+    /**
+     * @return string
+     */
+    public function getHair() {
+        return $this->hair;
+    }
+    /**
+     * @return string
+     */
+    public function getMeasurements() {
+        return $this->measurements;
+    }
+    /**
+     * @return string
+     */
+    public function getStyle() {
+        return $this->style;
+    }
+    /**
+     * @return string
+     */
+    public function getOrigins() {
+        return $this->origins;
+    }
+    /**
+     * @return string
+     */
+    public function getSigns() {
+        return $this->signs;
+    }
+    /**
+     * @return string
+     */
+    public function getJob() {
+        return $this->job;
+    }
+    /**
+     * @return string
+     */
+    public function getFood() {
+        return $this->food;
+    }
+    /**
+     * @return string
+     */
+    public function getAlcohol() {
+        return $this->alcohol;
+    }
+    /**
+     * @return string
+     */
+    public function getSmoke() {
+        return $this->smoke;
+    }
 
 
 
@@ -188,34 +292,6 @@ class AumGirlProfilePage extends AumProfilePage {
     }
 
     /**
-     * @param integer $value
-     */
-    public function setVisitsPoints($value) {
-        $this->visitsPoints = $value;
-    }
-
-    /**
-     * @param integer $value
-     */
-    public function setCharmsPoints($value) {
-        $this->charmsPoints = $value;
-    }
-
-    /**
-     * @param integer $value
-     */
-    public function setBasketsPoints($value) {
-        $this->basketsPoints = $value;
-    }
-
-    /**
-     * @param integer $value
-     */
-    public function setMailsPoints($value) {
-        $this->mailsPoints = $value;
-    }
-
-    /**
      * @param string $about 
      */
     public function setAbout($about) {
@@ -223,12 +299,84 @@ class AumGirlProfilePage extends AumProfilePage {
     }
 
     /**
-     *
      * @param string $name
      */
     public function setName($name) {
         $this->name = $name;
     }
+    /**
+     * @param string $age
+     */
+    public function setAge($age) {
+        $this->age = $age;
+    }
+    /**
+     * @param string $location
+     */
+    public function setLocation($location) {
+        $this->location = $location;
+    }
+    /**
+     * @param string $eyes
+     */
+    public function setEyes($eyes) {
+        $this->eyes = $eyes;
+    }
+    /**
+     * @param string $hair
+     */
+    public function setHair($hair) {
+        $this->hair = $hair;
+    }
+    /**
+     * @param string $measurements
+     */
+    public function setMeasurements($measurements) {
+        $this->measurements = $measurements;
+    }
+    /**
+     * @param string $style
+     */
+    public function setStyle($style) {
+        $this->style = $style;
+    }
+    /**
+     * @param string $origins
+     */
+    public function setOrigins($origins) {
+        $this->origins = $origins;
+    }
+    /**
+     * @param string $signs
+     */
+    public function setSigns($signs) {
+        $this->signs = $signs;
+    }
+    /**
+     * @param string $job
+     */
+    public function setJob($job) {
+        $this->job = $job;
+    }
+    /**
+     * @param string $food
+     */
+    public function setFood($food) {
+        $this->food = $food;
+    }
+    /**
+     * @param string $alcohol
+     */
+    public function setAlcohol($alcohol) {
+        $this->alcohol = $alcohol;
+    }
+    /**
+     * @param string $smoke
+     */
+    public function setSmoke($smoke) {
+        $this->smoke = $smoke;
+    }
+
 
 
 }
