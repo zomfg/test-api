@@ -13,7 +13,7 @@ class CurlHttpClient implements IHttpClient {
     protected $_followlocation;
     protected $_timeout = 30;
     protected $_maxRedirects = 4;
-    protected $_cookieFileLocation = './cookie.txt';
+    protected $_cookieFileLocation = './cookies/';
     protected $_post = false;
     protected $_postFields = array();
     protected $_referer = "http://www.google.com";
@@ -34,8 +34,6 @@ class CurlHttpClient implements IHttpClient {
         $this->_noBody = $noBody;
         $this->_includeHeader = $includeHeader;
         $this->_binaryTransfer = $binaryTransfer;
-
-        $this->_cookieFileLocation = dirname(__FILE__) . '/cookie.txt';
         $this->init();
     }
 
@@ -53,10 +51,9 @@ class CurlHttpClient implements IHttpClient {
         curl_setopt($this->curlHandler, CURLOPT_MAXREDIRS, $this->_maxRedirects);
         curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->curlHandler, CURLOPT_FOLLOWLOCATION, $this->_followlocation);
-        curl_setopt($this->curlHandler, CURLOPT_COOKIEJAR, $this->_cookieFileLocation);
-        curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, $this->_cookieFileLocation);
         curl_setopt($this->curlHandler, CURLOPT_USERAGENT, $this->_useragent);
         curl_setopt($this->curlHandler, CURLOPT_REFERER, $this->_referer);
+        $this->setCookieJar($cookieJar);
         return true;
     }
 
@@ -148,6 +145,12 @@ class CurlHttpClient implements IHttpClient {
 
     public function setUrl($url) {
         $this->url = $url;
+    }
+
+    public function setCookieJar($cookieJar) {
+        $this->_cookieFileLocation = dirname(__FILE__) . '/cookies/'.$cookieJar.'.txt';
+        curl_setopt($this->curlHandler, CURLOPT_COOKIEJAR, $this->_cookieFileLocation);
+        curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, $this->_cookieFileLocation);
     }
 
     public function __tostring() {

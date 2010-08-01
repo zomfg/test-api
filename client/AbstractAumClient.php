@@ -14,14 +14,14 @@ abstract class AbstractAumClient implements IAumClient {
      * @param AumUser $user
      * @return boolean
      */
-    public function connect(AumUser $user) {
+    public function init(AumUser $user) {
         if (!($user instanceof AumUser))
             return false;
         $this->user = $user;
         return true;
     }
 
-    public function disconnect() {
+    public function reset() {
         unset($this->user);
     }
 }

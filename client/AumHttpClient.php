@@ -12,13 +12,17 @@ class AumHttpClient extends AbstractAumClient {
 
 
     public function __construct() {
-
     }
 
-    public function connect(AumUser $user) {
-        if (!parent::connect($user))
+    public function init(AumUser $user) {
+        if (!parent::init($user))
             return false;
         $this->client = new CurlHttpClient();
+        $this->client->setCookieJar(md5($this->user->getEmail()));
+        return true;
+    }
+
+    public function login() {
         $params = array( // post
             'login' => $this->user->getEmail(),
             'password' => $this->user->getPassword(),
@@ -26,14 +30,13 @@ class AumHttpClient extends AbstractAumClient {
             'y_1' => 1,
             'remember' => 'true'
             );
-        $this->client->sendPostRequest('http://www.adopteunmec.com/redirect.php?action=login', $params);
+        return $this->client->sendPostRequest('http://www.adopteunmec.com/redirect.php?action=login', $params);
         //$params = array('login' => $this->user->getEmail(), 'pass' => $this->user->getPassHash()); // get
-        return true;
     }
 
-    public function  disconnect() {
+    public function  logout() {
         $this->client->sendGetRequest('http://www.adopteunmec.com/redirect.php?action=logout');
-        parent::disconnect();
+        return $this->client;
     }
 
     /**
