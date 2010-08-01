@@ -133,10 +133,25 @@ class AumGirlProfilePage extends AumProfilePage {
      * @var string
      */
     private $qualifiers = '';
-
+    /**
+     *
+     * @var array
+     */
     private $movies = array();
+    /**
+     *
+     * @var array
+     */
     private $music = array();
+    /**
+     *
+     * @var array
+     */
     private $books = array();
+    /**
+     *
+     * @var array
+     */
     private $tvShows = array();
     
     public function __construct() {
@@ -373,41 +388,30 @@ class AumGirlProfilePage extends AumProfilePage {
      *
      * @return array
      */
-    public function getMovies() {
+    public function &getMovies() {
         return $this->movies;
     }
     /**
      *
      * @return array
      */
-    public function getMusic() {
+    public function &getMusic() {
         return $this->music;
     }
     /**
      *
      * @return array
      */
-    public function getBooks() {
+    public function &getBooks() {
         return $this->books;
     }
     /**
      *
      * @return array
      */
-    public function getTvShows() {
+    public function &getTvShows() {
         return $this->tvShows;
     }
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * @param integer $value
@@ -595,36 +599,35 @@ class AumGirlProfilePage extends AumProfilePage {
     public function setQualifiers($qualifiers) {
         $this->qualifiers = $qualifiers;
     }
+    
     /**
      *
-     * @param array $movies
+     * @param string $movie
      */
-    public function setMovies($movies) {
-        $this->movies = $movies;
+    public function addMovie($movie){
+        array_push($this->getMovies(), $movie);
     }
     /**
      *
-     * @param array $music
+     * @param string $song
      */
-    public function setMusic($music) {
-        $this->music = $music;
+    public function addSong($song){
+        array_push($this->getMusic(), $song);
     }
     /**
      *
-     * @param array $books
+     * @param string $book
      */
-    public function setBooks($books) {
-        $this->books = $books;
+    public function addBook($book){
+        array_push($this->getBooks(), $book);
     }
     /**
      *
-     * @param array $tvShows
+     * @param string $show
      */
-    public function setTvShows($tvShows) {
-        $this->tvShows = $tvShows;
+    public function addTvShow($show){
+        array_push($this->getTvShows(), $show);
     }
-
-
 
 }
 ?>

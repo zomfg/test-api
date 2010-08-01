@@ -171,9 +171,9 @@ class AumGirlProfileParser extends AumProfileParser{
                 // start after 'Cinéma'
                 for($j = 3 ; !stristr($likes[$i + $j]->plaintext, 'Livres') && $j + $i < count($likes) ; ++$j){
                     if($j % 2 == 1)
-                        array_push($music, $likes[$i + $j]->plaintext);
+                        $aumPage->addSong ($likes[$i + $j]->plaintext);
                     else
-                        array_push($cinema, $likes[$i + $j]->plaintext);
+                        $aumPage->addMovie($likes[$i + $j]->plaintext);
                 }
 
 
@@ -183,26 +183,12 @@ class AumGirlProfileParser extends AumProfileParser{
                 // start after 'Télé'
                 for($j = 2 ; $j + $i < count($likes) ; ++$j){
                     if($j % 2 == 0)
-                        array_push($books, $likes[$i + $j]->plaintext);
+                        $aumPage->addBook($likes[$i + $j]->plaintext);
                     else
-                        array_push($tv, $likes[$i + $j]->plaintext);
+                        $aumPage->addTvShow($likes[$i + $j]->plaintext);
                 }
             }
         }
-        $aumPage->setMovies($cinema);
-        $aumPage->setBooks($books);
-        $aumPage->setMusic($music);
-        $aumPage->setTvShows($tv);
-        /*
-        foreach($cinema as $film)
-            echo "cinema: " . $film . "<br/>";
-        foreach($music as $song)
-            echo "musique: " . $song . "<br/>";
-        foreach($books as $book)
-            echo "livres: " . $book . "<br/>";
-        foreach($tv as $show)
-            echo "tv: " . $show . "<br/>";
-*/
 
     }
 
