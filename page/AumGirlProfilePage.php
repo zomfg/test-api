@@ -92,19 +92,47 @@ class AumGirlProfilePage extends AumProfilePage {
     /**
      * @var string
      */
-    private $under;
+    private $under = '';
     /**
      * @var string
      */
-    private $titillate;
+    private $titillate = '';
     /**
      * @var string
      */
-    private $inBed;
+    private $inBed = '';
     /**
      * @var string
      */
-    private $accessories;
+    private $accessories = '';
+    /**
+     * @var string
+     */
+    private $crispy = '';
+    /**
+     * @var string
+     */
+    private $excites = '';
+    /**
+     * @var string
+     */
+    private $hates = '';
+    /**
+     * @var string
+     */
+    private $vices = '';
+    /**
+     * @var string
+     */
+    private $fantasies = '';
+    /**
+     * @var string
+     */
+    private $assets = '';
+    /**
+     * @var string
+     */
+    private $qualifiers = '';
     
     public function __construct() {
         parent::__construct();
@@ -294,6 +322,48 @@ class AumGirlProfilePage extends AumProfilePage {
         return $this->accessories;
     }
 
+    /**
+     * @return string
+     */
+    public function getCrispy() {
+        return $this->crispy;
+    }
+    /**
+     * @return string
+     */
+    public function getExcites() {
+        return $this->excites;
+    }
+    /**
+     * @return string
+     */
+    public function getHates() {
+        return $this->hates;
+    }
+    /**
+     * @return string
+     */
+    public function getVices() {
+        return $this->vices;
+    }
+    /**
+     * @return string
+     */
+    public function getFantasies() {
+        return $this->fantasies;
+    }
+    /**
+     * @return string
+     */
+    public function getAssets() {
+        return $this->assets;
+    }
+    /**
+     * @return string
+     */
+    public function getQualifiers() {
+        return $this->qualifiers;
+    }
 
     /**
      * @param integer $value
@@ -438,6 +508,48 @@ class AumGirlProfilePage extends AumProfilePage {
      */
     public function setAccessories($accessories) {
         $this->accessories = $accessories;
+    }
+    /**
+     * @param string $crispy
+     */
+    public function setCrispy($crispy) {
+        $this->crispy = $crispy;
+    }
+    /**
+     * @param string $excites
+     */
+    public function setExcites($excites) {
+        $this->excites = $excites;
+    }
+    /**
+     * @param string $hates
+     */
+    public function setHates($hates) {
+        $this->hates = $hates;
+    }
+    /**
+     * @param string $vices
+     */
+    public function setVices($vices) {
+        $this->vices = $vices;
+    }
+    /**
+     * @param string $fantasies
+     */
+    public function setFantasies($fantasies) {
+        $this->fantasies = $fantasies;
+    }
+    /**
+     * @param string $assets
+     */
+    public function setAssets($assets) {
+        $this->assets = $assets;
+    }
+    /**
+     * @param string $qualifiers
+     */
+    public function setQualifiers($qualifiers) {
+        $this->qualifiers = $qualifiers;
     }
 
 

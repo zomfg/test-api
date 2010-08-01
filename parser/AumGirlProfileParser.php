@@ -129,7 +129,6 @@ class AumGirlProfileParser extends AumProfileParser{
      */
     private function parseSexo(simple_html_dom_node $sexo, AumGirlProfilePage $aumPage){
         $sexo = $sexo->find('text');
-        echo count($sexo) . "sexos";
         
         for($i = 0 ; $i < count($sexo) ; ++$i){
             $sexo[$i]->plaintext = utf8_encode($sexo[$i]->plaintext);
@@ -156,7 +155,36 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param AumGirlProfilePage $aumPage
      */
     private function parseCharacteristics(simple_html_dom_node $chars, AumGirlProfilePage $aumPage){
-        
+        $chars = $chars->find('text');
+
+        for($i = 0 ; $i < count($chars) ; ++$i){
+            $chars[$i]->plaintext = utf8_encode($chars[$i]->plaintext);
+
+            if(stristr($chars[$i]->plaintext, 'craquer')){
+                $aumPage->setCrispy($chars[++$i]);
+            }
+            else if(stristr($chars[$i]->plaintext, 'excite')){
+                $aumPage->setExcites($chars[++$i]);
+            }
+            else if(stristr($chars[$i]->plaintext, 'déteste')){
+                $aumPage->setHates($chars[++$i]);
+            }
+            else if(stristr($chars[$i]->plaintext, 'vices')){
+                $aumPage->setVices($chars[++$i]);
+            }
+            else if(stristr($chars[$i]->plaintext, 'fantasmes')){
+                $aumPage->setFantasies($chars[++$i]);
+            }
+            else if(stristr($chars[$i]->plaintext, 'atouts')){
+                $aumPage->setAssets($chars[++$i]);
+            }
+            else if(stristr($chars[$i]->plaintext, 'elle est')){
+                $aumPage->setQualifiers($chars[++$i]);
+            }
+
+
+
+        }
     }
 
 }
