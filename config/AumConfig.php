@@ -13,7 +13,7 @@ class AumConfig {
     /**
      * @var array
      */
-    private $arrayConfig = null;
+    private $iniArray = null;
 
     /**
      * @var Aumconfig
@@ -22,7 +22,7 @@ class AumConfig {
 
 
     public function __construct(){
-        $this->arrayConfig = parse_ini_file('config/config.ini', true);
+        $this->iniArray = parse_ini_file('config/config.ini', true);
     }
     
     /**
@@ -41,9 +41,8 @@ class AumConfig {
      * @return string
      */
     public function getUrl($aumPage){
-        return $this->arrayConfig['pages'][get_class($aumPage)];
+        return $this->iniArray['pages'][get_class($aumPage)];
     }
     
-
 }
 ?>
