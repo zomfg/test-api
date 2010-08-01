@@ -7,33 +7,26 @@
  */
 class CurlHttpClient implements IHttpClient {
 
-    private $curlHandler = null;
-    protected $_useragent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1';
-    protected $url = null;
-    protected $_followlocation;
-    protected $_timeout = 30;
-    protected $_maxRedirects = 4;
-    protected $_cookieFileLocation = './cookies/';
-    protected $_post = false;
-    protected $_postFields = array();
-    protected $_referer = "http://www.google.com";
+    private $curlHandler    = null;
+    protected $_useragent   = null;
+    protected $url          = null;
+    protected $_followlocation = true;
+    protected $_timeout     = 30;
+    protected $_maxRedirects= 4;
+    protected $_cookieFileLocation = './cookies/cookie.txt';
+    protected $_postFields  = array();
+    protected $_referer     = "http://www.adopteunmec.com";
     protected $_session;
-    protected $_webpage = null;
-    protected $_includeHeader;
-    protected $_noBody;
-    protected $_status;
-    protected $_binaryTransfer;
+    protected $_webpage     = null;
+    protected $_includeHeader = true;
+    protected $_noBody      = false;
+    protected $_status      = null;
+    protected $_binaryTransfer = false;
     private $authentication = 0;
-    private $auth_name = '';
-    private $auth_pass = '';
+    private $auth_name      = '';
+    private $auth_pass      = '';
 
-    public function __construct($followlocation = true, $timeOut = 30, $maxRedirecs = 4, $binaryTransfer = false, $includeHeader = false, $noBody = false) {
-        $this->_followlocation = $followlocation;
-        $this->_timeout = $timeOut;
-        $this->_maxRedirects = $maxRedirecs;
-        $this->_noBody = $noBody;
-        $this->_includeHeader = $includeHeader;
-        $this->_binaryTransfer = $binaryTransfer;
+    public function __construct() {
         $this->init();
     }
 
@@ -46,14 +39,9 @@ class CurlHttpClient implements IHttpClient {
         $this->curlHandler = curl_init();
         if (!$this->curlHandler)
             return false;
-        curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER, array('Expect:'));
-        curl_setopt($this->curlHandler, CURLOPT_TIMEOUT, $this->_timeout);
-        curl_setopt($this->curlHandler, CURLOPT_MAXREDIRS, $this->_maxRedirects);
-        curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curlHandler, CURLOPT_FOLLOWLOCATION, $this->_followlocation);
-        curl_setopt($this->curlHandler, CURLOPT_USERAGENT, $this->_useragent);
-        curl_setopt($this->curlHandler, CURLOPT_REFERER, $this->_referer);
-        $this->setCookieJar($cookieJar);
+
+        $this->setUserAgent(UserAgent::get());
+        $this->setCookieJar('cookie');
         return true;
     }
 
@@ -79,13 +67,48 @@ class CurlHttpClient implements IHttpClient {
         $this->_cookieFileLocation = $path;
     }
 
-    public function setPost($postFields) {
-        $this->_post = true;
-        $this->_postFields = $postFields;
-    }
-
     public function setUserAgent($userAgent) {
         $this->_useragent = $userAgent;
+    }
+
+    public function getHttpStatus() {
+        return $this->_status;
+    }
+
+    public function getUrl() {
+        return $this->url;
+    }
+
+    public function setUrl($url) {
+        $this->url = $url;
+    }
+
+    public function setCookieJar($cookieJar) {
+        $this->_cookieFileLocation = dirname(__FILE__) . '/cookies/'.$cookieJar.'.txt';
+    }
+
+    public function setTimeout($_timeout) {
+        $this->_timeout = $_timeout;
+    }
+
+    public function setMaxRedirects($_maxRedirects) {
+        $this->_maxRedirects = $_maxRedirects;
+    }
+
+    public function setIncludeHeader($_includeHeader) {
+        $this->_includeHeader = $_includeHeader;
+    }
+
+    public function setNoBody($_noBody) {
+        $this->_noBody = $_noBody;
+    }
+
+    public function setBinaryTransfer($_binaryTransfer) {
+        $this->_binaryTransfer = $_binaryTransfer;
+    }
+
+    public function getStatus() {
+        return $this->_status;
     }
 
     public function sendGetRequest($url = null, array $data = null) {
@@ -95,7 +118,7 @@ class CurlHttpClient implements IHttpClient {
             $this->url = $url;
         if ($data != null)
             $this->_postFields = $data;
-        curl_setopt($this->curlHandler, CURLOPT_POST, false);
+        curl_setopt($this->curlHandler, CURLOPT_HTTPGET, true);
         $this->url = $url .'?'. http_build_query($this->_postFields);
         return $this->sendRequest();
     }
@@ -123,34 +146,21 @@ class CurlHttpClient implements IHttpClient {
 
         if ($this->_noBody)
             curl_setopt($this->curlHandler, CURLOPT_NOBODY, true);
-        /*
-          if($this->_binary)
-          {
-          curl_setopt($s,CURLOPT_BINARYTRANSFER,true);
-          }
-        */
+        curl_setopt($this->curlHandler, CURLOPT_REFERER, $this->_referer);
+        curl_setopt($this->curlHandler, CURLOPT_USERAGENT, $this->_useragent);
+        curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER, array('Expect:'));
+        curl_setopt($this->curlHandler, CURLOPT_TIMEOUT, $this->_timeout);
+        curl_setopt($this->curlHandler, CURLOPT_MAXREDIRS, $this->_maxRedirects);
+        curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->curlHandler, CURLOPT_FOLLOWLOCATION, $this->_followlocation);
+        curl_setopt($this->curlHandler, CURLOPT_COOKIEJAR, $this->_cookieFileLocation);
+        curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, $this->_cookieFileLocation);
+//        if($this->_binary)
+//            curl_setopt($s,CURLOPT_BINARYTRANSFER,true);
         $result = curl_setopt($this->curlHandler, CURLOPT_URL, $this->url);
         $this->_webpage = curl_exec($this->curlHandler);
         $this->_status = curl_getinfo($this->curlHandler, CURLINFO_HTTP_CODE);
         return $result;
-    }
-
-    public function getHttpStatus() {
-        return $this->_status;
-    }
-
-    public function getUrl() {
-        return $this->url;
-    }
-
-    public function setUrl($url) {
-        $this->url = $url;
-    }
-
-    public function setCookieJar($cookieJar) {
-        $this->_cookieFileLocation = dirname(__FILE__) . '/cookies/'.$cookieJar.'.txt';
-        curl_setopt($this->curlHandler, CURLOPT_COOKIEJAR, $this->_cookieFileLocation);
-        curl_setopt($this->curlHandler, CURLOPT_COOKIEFILE, $this->_cookieFileLocation);
     }
 
     public function __tostring() {

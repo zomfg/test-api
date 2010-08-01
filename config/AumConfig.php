@@ -29,11 +29,9 @@ class AumConfig {
      * @return AumConfig
      */
     public static function Config(){
-        if(AumConfig::$config == null){
-            AumConfig::$config = new AumConfig();
-        }
-
-        return AumConfig::$config;
+        if(self::$config == null)
+            self::$config = new self();
+        return self::$config;
     }
 
     /**
@@ -43,7 +41,13 @@ class AumConfig {
     public function getUrl($aumPage){
         return $this->arrayConfig['pages'][get_class($aumPage)];
     }
-    
 
+    /**
+     * @param string $aumAction
+     * @return string
+     */
+    public function getActionUrl($aumAction) {
+        return $this->arrayConfig['actions'][$aumAction];
+    }
 }
 ?>

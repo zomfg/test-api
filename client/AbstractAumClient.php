@@ -24,5 +24,9 @@ abstract class AbstractAumClient implements IAumClient {
     public function reset() {
         unset($this->user);
     }
+
+    public function getActionUrl($actionName) {
+        return AumConfig::Config()->getActionUrl($actionName);
+    }
 }
 ?>
