@@ -97,6 +97,18 @@ class AumProfilePage extends AumPage{
      * @var array
      */
     private $tvShows = array();
+
+    /**
+     *
+     * @var string
+     */
+    private $mainPhotoThumb = '';
+    /**
+     *
+     * @var array
+     */
+    private $secondaryPhotoThumbs = array();
+    
     function __construct() {
         parent::__construct();
     }
@@ -181,6 +193,13 @@ class AumProfilePage extends AumPage{
         return $this->measurements;
     }
 
+    public function getMainPhotoThumb() {
+        return $this->mainPhotoThumb;
+    }
+
+    public function &getSecondaryPhotoThumbs() {
+        return $this->secondaryPhotoThumbs;
+    }
 
 
 
@@ -303,6 +322,14 @@ class AumProfilePage extends AumPage{
      */
     public function addTvShow($show){
         array_push($this->getTvShows(), $show);
+    }
+
+    public function setMainPhotoThumb($mainPhotoThumb) {
+        $this->mainPhotoThumb = $mainPhotoThumb;
+    }
+
+    public function addSecondaryPhotoThumb($secondaryPhotoThumb) {
+        array_push($this->getSecondaryPhotoThumbs(), $secondaryPhotoThumb);
     }
 
 

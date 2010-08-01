@@ -20,6 +20,7 @@ abstract class AumProfileParser extends AumParser{
         
         $this->parseAbout($aumPage);
         $this->parseStats($aumPage);
+        $this->parsePictures($aumPage);
     }
 
     /**
@@ -98,7 +99,21 @@ abstract class AumProfileParser extends AumParser{
         }
 
     }
-    
+
+
+    /**
+     *
+     * @param AumProfilePage $aumPage 
+     */
+    private function parsePictures(AumProfilePage $aumPage){
+        $photos = $this->dom->find('td[width=316] table tr td[width=250]');
+        $aumPage->setMainPhotoThumb($photos[0]->background);
+        
+        $photos = $this->dom->find('td[width=316] table tr[height=66] td[width=66]');
+        foreach($photos as $photo){
+            $aumPage->addSecondaryPhotoThumb($photo->background);
+        }
+    }
     /**
     * @param AumProfilePage $aumPage
     */
