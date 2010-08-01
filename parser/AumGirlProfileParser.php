@@ -120,7 +120,90 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param AumGirlProfilePage $aumPage
      */
     private function parseLikes(simple_html_dom_node $likes, AumGirlProfilePage $aumPage){
+        $likes = $likes->find('text');
+        /*
+         * Hobbies
+           aum
+
+           Musique
+           Cinéma
+
+             un
+             un
+             deux
+             deux
+             trois
+             trois
+
+
+
+
+
+
+
+
+
+          Livres
+          Télé
+
+            un
+            un
+            deux
+            deux
+            trois
+            trois
+         */
+        $music = array();
+        $cinema = array();
+        $books = array();
+        $tv = array();
         
+        for($i = 0 ; $i < count($likes) ; ++$i){
+            $likes[$i]->plaintext = utf8_encode($likes[$i]->plaintext);
+            
+            if(stristr($likes[$i]->plaintext, 'hobbies')){
+                //$aumPage->setHobbies($likes[++$i]);
+            }
+
+            
+            else if(stristr($likes[$i]->plaintext, 'musique')){
+                // parse music and cinema
+                // start after 'Cinéma'
+                for($j = 3 ; !stristr($likes[$i + $j]->plaintext, 'Livres') && $j + $i < count($likes) ; ++$j){
+                    if($j % 2 == 1)
+                        array_push($music, $likes[$i + $j]->plaintext);
+                    else
+                        array_push($cinema, $likes[$i + $j]->plaintext);
+                }
+
+
+            }
+            else if(stristr($likes[$i]->plaintext, 'télé')){
+                // parse books and tv
+                // start after 'Télé'
+                for($j = 2 ; $j + $i < count($likes) ; ++$j){
+                    if($j % 2 == 0)
+                        array_push($books, $likes[$i + $j]->plaintext);
+                    else
+                        array_push($tv, $likes[$i + $j]->plaintext);
+                }
+            }
+        }
+        $aumPage->setMovies($cinema);
+        $aumPage->setBooks($books);
+        $aumPage->setMusic($music);
+        $aumPage->setTvShows($tv);
+        /*
+        foreach($cinema as $film)
+            echo "cinema: " . $film . "<br/>";
+        foreach($music as $song)
+            echo "musique: " . $song . "<br/>";
+        foreach($books as $book)
+            echo "livres: " . $book . "<br/>";
+        foreach($tv as $show)
+            echo "tv: " . $show . "<br/>";
+*/
+
     }
 
     /**
@@ -181,9 +264,6 @@ class AumGirlProfileParser extends AumProfileParser{
             else if(stristr($chars[$i]->plaintext, 'elle est')){
                 $aumPage->setQualifiers($chars[++$i]);
             }
-
-
-
         }
     }
 

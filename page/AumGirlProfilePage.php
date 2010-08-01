@@ -133,6 +133,11 @@ class AumGirlProfilePage extends AumProfilePage {
      * @var string
      */
     private $qualifiers = '';
+
+    private $movies = array();
+    private $music = array();
+    private $books = array();
+    private $tvShows = array();
     
     public function __construct() {
         parent::__construct();
@@ -364,6 +369,45 @@ class AumGirlProfilePage extends AumProfilePage {
     public function getQualifiers() {
         return $this->qualifiers;
     }
+    /**
+     *
+     * @return array
+     */
+    public function getMovies() {
+        return $this->movies;
+    }
+    /**
+     *
+     * @return array
+     */
+    public function getMusic() {
+        return $this->music;
+    }
+    /**
+     *
+     * @return array
+     */
+    public function getBooks() {
+        return $this->books;
+    }
+    /**
+     *
+     * @return array
+     */
+    public function getTvShows() {
+        return $this->tvShows;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @param integer $value
@@ -550,6 +594,34 @@ class AumGirlProfilePage extends AumProfilePage {
      */
     public function setQualifiers($qualifiers) {
         $this->qualifiers = $qualifiers;
+    }
+    /**
+     *
+     * @param array $movies
+     */
+    public function setMovies($movies) {
+        $this->movies = $movies;
+    }
+    /**
+     *
+     * @param array $music
+     */
+    public function setMusic($music) {
+        $this->music = $music;
+    }
+    /**
+     *
+     * @param array $books
+     */
+    public function setBooks($books) {
+        $this->books = $books;
+    }
+    /**
+     *
+     * @param array $tvShows
+     */
+    public function setTvShows($tvShows) {
+        $this->tvShows = $tvShows;
     }
 
 
