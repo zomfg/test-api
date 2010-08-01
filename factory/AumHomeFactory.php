@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-class AumHomeFactory {
+class AumHomeFactory extends AbstractAumFactory {
     
     function __construct() {
 

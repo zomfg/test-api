@@ -13,8 +13,11 @@ class AumCharmParser  implements IAumParser {
     function __construct() {
 
     }
-    
-    public function Parse(AumCharmPage $aumPage){
+
+    /**
+     * @param AumCharmPage $aumPage
+     */
+    public function parse(IAumPage $aumPage){
 
     }
 }

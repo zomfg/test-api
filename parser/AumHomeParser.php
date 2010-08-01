@@ -10,38 +10,56 @@
  * @author dirk
  */
 class AumHomeParser extends AumParser{
+
     function __construct() {
         parent::__construct();
     }
 
-    public function Parse(IAumPage $aumPage){
+    /**
+     * @param AumHomePage $aumPage
+     */
+    public function parse(IAumPage $aumPage){
         $this->dom->load($aumPage->getHtmlBody());
 
+        $this->parseNumbers($aumPage);
+        $this->parseLastEvents($aumPage);
+        $this->parseMiniatures($aumPage);
+    }
 
-        $newMails = $this->dom->find('span[id=mailsCounter]');
-        $newVisits = $this->dom->find('span[id=visitesCounter]');
-        $newBaskets = $this->dom->find('span[id=flashsCounter]');
+    /**
+     * @param AumHomePage $aumPage
+     */
+    private function parseNumbers(AumHomePage $aumPage){
 
-        if(count($newMails) > 0)
-            $newMails = $newMails[0];
-        else
-            $newMails = 0;
-
-        if(count($newVisits) > 0)
-            $newVisits = $newVisits[0];
-        else
-            $newMails = 0;
-
-        if(count($newBaskets) > 0)
-            $newBaskets = $newBaskets[0];
-        else
-            $newBaskets = 0;
-
+        $newMails = $this->dom->find('span[id=mailsCounter]', 0);
+        $newVisits = $this->dom->find('span[id=visitesCounter]', 0);
+        $newBaskets = $this->dom->find('span[id=flashsCounter]', 0);
+        $baskets = $this->dom->find('big[id=basketCount', 0);
+        $popularity = $this->dom->find('big[id=popScore]', 0);
+        
         $aumPage->setNewMailsCounter($newMails);
         $aumPage->setNewBasketsCounter($newBaskets);
         $aumPage->setNewVisitsCounter($newVisits);
-
+        $aumPage->setBasketsCounter($baskets);
+        $aumPage->setPopularity($popularity);
     }
 
+    /**
+     * @param AumHomePage $aumPage 
+     */
+    private function parseLastEvents(AumHomePage $aumPage){
+       $lastEvents = $this->dom->find('[class]');
+       print_r($lastEvents);
+       foreach($lastEvents as $event){
+           echo $event;
+       }
+    }
+    
+    /**
+     * @param AumHomePage $aumPage
+     */
+    private function parseMiniatures(AumHomePage $aumPage){
+        
+    }
 }
 ?>

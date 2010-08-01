@@ -10,6 +10,9 @@
  * @author dirk
  */
 abstract class AumParser implements IAumParser {
+    /**
+     * @var simple_html_dom
+     */
     protected $dom;
 
     function __construct() {
