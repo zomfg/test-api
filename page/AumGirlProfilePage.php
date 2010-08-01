@@ -89,6 +89,22 @@ class AumGirlProfilePage extends AumProfilePage {
      * @var string
      */
     private $smoke = '';
+    /**
+     * @var string
+     */
+    private $under;
+    /**
+     * @var string
+     */
+    private $titillate;
+    /**
+     * @var string
+     */
+    private $inBed;
+    /**
+     * @var string
+     */
+    private $accessories;
     
     public function __construct() {
         parent::__construct();
@@ -253,7 +269,30 @@ class AumGirlProfilePage extends AumProfilePage {
     public function getSmoke() {
         return $this->smoke;
     }
-
+    /**
+     * @return string
+     */
+    public function getUnder() {
+        return $this->under;
+    }
+    /**
+     * @return string
+     */
+    public function getTitillate() {
+        return $this->titillate;
+    }
+    /**
+     * @return string
+     */
+    public function getInBed() {
+        return $this->inBed;
+    }
+    /**
+     * @return string
+     */
+    public function getAccessories() {
+        return $this->accessories;
+    }
 
 
     /**
@@ -375,6 +414,30 @@ class AumGirlProfilePage extends AumProfilePage {
      */
     public function setSmoke($smoke) {
         $this->smoke = $smoke;
+    }
+    /**
+     * @param string $under
+     */
+    public function setUnder($under) {
+        $this->under = $under;
+    }
+    /**
+     * @param string $titillate
+     */
+    public function setTitillate($titillate) {
+        $this->titillate = $titillate;
+    }
+    /**
+     * @param string $inBed
+     */
+    public function setInBed($inBed) {
+        $this->inBed = $inBed;
+    }
+    /**
+     * @param string $accessories
+     */
+    public function setAccessories($accessories) {
+        $this->accessories = $accessories;
     }
 
 

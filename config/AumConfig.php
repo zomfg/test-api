@@ -42,19 +42,30 @@ class AumConfig {
         return $this->iniArray['pages'][get_class($aumPage)];
     }
 
-
+    /**
+     * @return integer
+     */
     public function getCharmValue(){
         return $this->iniArray["values"]["charm"];
     }
 
+    /**
+     * @return integer
+     */
     public function getVisitValue(){
         return $this->iniArray["values"]["visit"];
     }
 
+    /**
+     * @return integer
+     */
     public function getMailValue(){
         return $this->iniArray["values"]["mail"];
     }
 
+    /**
+     * @return integer
+     */
     public function getBasketValue(){
         return $this->iniArray["values"]["basket"];
     }

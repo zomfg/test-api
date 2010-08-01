@@ -74,7 +74,6 @@ class AumGirlProfileParser extends AumProfileParser{
         $details = $details->find('text');
 
         for($i = 0 ; $i < count($details) ; ++$i){
-            //echo $details[$i] . "---<br/>";
             $details[$i]->plaintext = utf8_encode($details[$i]->plaintext);
 
             if(stristr($details[$i]->plaintext, 'age')){
@@ -113,14 +112,7 @@ class AumGirlProfileParser extends AumProfileParser{
             else if(stristr($details[$i]->plaintext, 'tabac')){
                 $aumPage->setSmoke($details[++$i]);
             }
-
-
         }
-
-
-
-
-
     }
 
     /**
@@ -128,7 +120,7 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param AumGirlProfilePage $aumPage
      */
     private function parseLikes(simple_html_dom_node $likes, AumGirlProfilePage $aumPage){
-
+        
     }
 
     /**
@@ -136,6 +128,26 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param AumGirlProfilePage $aumPage
      */
     private function parseSexo(simple_html_dom_node $sexo, AumGirlProfilePage $aumPage){
+        $sexo = $sexo->find('text');
+        echo count($sexo) . "sexos";
+        
+        for($i = 0 ; $i < count($sexo) ; ++$i){
+            $sexo[$i]->plaintext = utf8_encode($sexo[$i]->plaintext);
+
+            if(stristr($sexo[$i]->plaintext, 'ce qui se cache en dessous')){
+                $aumPage->setUnder($sexo[++$i]);
+            }
+            else if(stristr($sexo[$i]->plaintext, 'ce qui m\'émoustille')){
+                $aumPage->setTitillate($sexo[++$i]);
+            }
+            else if(stristr($sexo[$i]->plaintext, 'au lit j\'aime')){
+                $aumPage->setInBed($sexo[++$i]);
+            }
+            else if(stristr($sexo[$i]->plaintext, 'mes accessoires')){
+                $aumPage->setAccessories($sexo[++$i]);
+            }
+
+        }
 
     }
 
