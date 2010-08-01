@@ -42,6 +42,11 @@ class AumGirlProfilePage extends AumProfilePage {
      */
     private $name = '';
     /**
+     *
+     * @var string
+     */
+    private $quote = '';
+    /**
      * @var string
      */
     private $age = '';
@@ -133,6 +138,10 @@ class AumGirlProfilePage extends AumProfilePage {
      * @var string
      */
     private $qualifiers = '';
+     /**
+     * @var string
+     */
+    private $hobbies = '';
     /**
      *
      * @var array
@@ -412,6 +421,21 @@ class AumGirlProfilePage extends AumProfilePage {
     public function &getTvShows() {
         return $this->tvShows;
     }
+    /**
+     *
+     * @return string
+     */
+    public function getQuote() {
+        return $this->quote;
+    }
+
+     /**
+     *
+     * @return string
+     */
+    public function getHobbies() {
+        return $this->hobbies;
+    }
 
     /**
      * @param integer $value
@@ -628,6 +652,21 @@ class AumGirlProfilePage extends AumProfilePage {
     public function addTvShow($show){
         array_push($this->getTvShows(), $show);
     }
+    /**
+     *
+     * @param string $quote 
+     */
+    public function setQuote($quote) {
+        $this->quote = $quote;
+    }
+
+    /**
+     * @param string $hobbies
+     */
+    public function setHobbies($hobbies){
+        $this->hobbies = $hobbies;
+    }
+
 
 }
 ?>

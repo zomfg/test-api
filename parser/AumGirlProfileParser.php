@@ -20,10 +20,6 @@ class AumGirlProfileParser extends AumProfileParser{
     public function parse(IAumPage $aumPage){
         $this->dom->load($aumPage->getHtmlBody());
 
-        $name = $this->dom->find('title');
-        $name = preg_split("/\s/" , $name[0]->plaintext);
-        $aumPage->setName($name[0]);
-
         $this->parseStats($aumPage);
         $this->parseAbout($aumPage);
     }
@@ -33,7 +29,6 @@ class AumGirlProfileParser extends AumProfileParser{
      */
     private function parseStats(AumProfilePage $aumPage){
         $stats = $this->dom->find('td[class=viewPopu]');
-
 
        // set the counters
        $aumPage->setVisitsCounter(intval(str_replace(' ', '', $stats[0]->nextSibling()->plaintext)));
@@ -49,21 +44,20 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param AumProfilePage $aumPage
      */
     private function parseAbout(AumProfilePage $aumPage){
+        $tmp = $this->dom->find('td[width=225] table td');
+        $aumPage->setName($tmp[0]->plaintext);
+        $aumPage->setQuote($tmp[2]->plaintext);
+
+
         $aboutText = $this->dom->find('div[id=about_div]');
         $aumPage->setAbout(trim($aboutText[0]->plaintext));
 
         $all = $this->dom->find('table[width=451]');
-
+        
         $this->parseDetails($all[1], $aumPage);
         $this->parseLikes($all[2], $aumPage);
         $this->parseSexo($all[3], $aumPage);
         $this->parseCharacteristics($all[4], $aumPage);
-        /*
-        echo $details;
-        echo $likes;
-        echo $sexo;
-        echo $characteristics;*/
-
     }
 
     /**
@@ -162,7 +156,7 @@ class AumGirlProfileParser extends AumProfileParser{
             $likes[$i]->plaintext = utf8_encode($likes[$i]->plaintext);
             
             if(stristr($likes[$i]->plaintext, 'hobbies')){
-                //$aumPage->setHobbies($likes[++$i]);
+                $aumPage->setHobbies($likes[++$i]);
             }
 
             
