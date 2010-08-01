@@ -12,10 +12,7 @@
  */
 class AumGirlProfilePage extends AumProfilePage {
 
-    /**
-     * @var integer
-     */
-    private $visitsCounter = 0;
+
     /**
      * @var integer
      */
@@ -33,67 +30,10 @@ class AumGirlProfilePage extends AumProfilePage {
      */
     private $bonus = 0;
     /**
-     * @var string 
-     */
-    private $about = '';
-    /**
-     *
-     * @var string
-     */
-    private $name = '';
-    /**
-     *
-     * @var string
-     */
-    private $quote = '';
-    /**
-     * @var string
-     */
-    private $age = '';
-    /**
-     * @var string
-     */
-    private $location = '';
-    /**
-     * @var string
-     */
-    private $eyes = '';
-    /**
-     * @var string
-     */
-    private $hair = '';
-    /**
-     * @var string
-     */
-    private $measurements = '';
-    /**
-     * @var string
-     */
-    private $style = '';
-    /**
-     * @var string
-     */
-    private $origins = '';
-    /**
      * @var string
      */
     private $signs = '';
-    /**
-     * @var string
-     */
-    private $job = '';
-    /**
-     * @var string
-     */
-    private $food = '';
-    /**
-     * @var string
-     */
-    private $alcohol = '';
-    /**
-     * @var string
-     */
-    private $smoke = '';
+
     /**
      * @var string
      */
@@ -138,30 +78,7 @@ class AumGirlProfilePage extends AumProfilePage {
      * @var string
      */
     private $qualifiers = '';
-     /**
-     * @var string
-     */
-    private $hobbies = '';
-    /**
-     *
-     * @var array
-     */
-    private $movies = array();
-    /**
-     *
-     * @var array
-     */
-    private $music = array();
-    /**
-     *
-     * @var array
-     */
-    private $books = array();
-    /**
-     *
-     * @var array
-     */
-    private $tvShows = array();
+
     
     public function __construct() {
         parent::__construct();
@@ -244,88 +161,12 @@ class AumGirlProfilePage extends AumProfilePage {
     /**
      * @return string
      */
-    public function getAbout() {
-        return $this->about;
-    }
-
-    /**
-     * @return string 
-     */
-    public function getName() {
-        return $this->name;
-    }
-    /**
-     * @return string
-     */
-    public function getAge() {
-        return $this->age;
-    }
-    /**
-     * @return string
-     */
-    public function getLocation() {
-        return $this->location;
-    }
-    /**
-     * @return string
-     */
-    public function getEyes() {
-        return $this->eyes;
-    }
-    /**
-     * @return string
-     */
-    public function getHair() {
-        return $this->hair;
-    }
-    /**
-     * @return string
-     */
-    public function getMeasurements() {
-        return $this->measurements;
-    }
-    /**
-     * @return string
-     */
-    public function getStyle() {
-        return $this->style;
-    }
-    /**
-     * @return string
-     */
-    public function getOrigins() {
-        return $this->origins;
-    }
-    /**
-     * @return string
-     */
     public function getSigns() {
         return $this->signs;
     }
     /**
      * @return string
      */
-    public function getJob() {
-        return $this->job;
-    }
-    /**
-     * @return string
-     */
-    public function getFood() {
-        return $this->food;
-    }
-    /**
-     * @return string
-     */
-    public function getAlcohol() {
-        return $this->alcohol;
-    }
-    /**
-     * @return string
-     */
-    public function getSmoke() {
-        return $this->smoke;
-    }
     /**
      * @return string
      */
@@ -393,49 +234,6 @@ class AumGirlProfilePage extends AumProfilePage {
     public function getQualifiers() {
         return $this->qualifiers;
     }
-    /**
-     *
-     * @return array
-     */
-    public function &getMovies() {
-        return $this->movies;
-    }
-    /**
-     *
-     * @return array
-     */
-    public function &getMusic() {
-        return $this->music;
-    }
-    /**
-     *
-     * @return array
-     */
-    public function &getBooks() {
-        return $this->books;
-    }
-    /**
-     *
-     * @return array
-     */
-    public function &getTvShows() {
-        return $this->tvShows;
-    }
-    /**
-     *
-     * @return string
-     */
-    public function getQuote() {
-        return $this->quote;
-    }
-
-     /**
-     *
-     * @return string
-     */
-    public function getHobbies() {
-        return $this->hobbies;
-    }
 
     /**
      * @param integer $value
@@ -479,194 +277,52 @@ class AumGirlProfilePage extends AumProfilePage {
         $this->about = $about;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name) {
-        $this->name = $name;
-    }
-    /**
-     * @param string $age
-     */
-    public function setAge($age) {
-        $this->age = $age;
-    }
-    /**
-     * @param string $location
-     */
-    public function setLocation($location) {
-        $this->location = $location;
-    }
-    /**
-     * @param string $eyes
-     */
-    public function setEyes($eyes) {
-        $this->eyes = $eyes;
-    }
-    /**
-     * @param string $hair
-     */
-    public function setHair($hair) {
-        $this->hair = $hair;
-    }
-    /**
-     * @param string $measurements
-     */
-    public function setMeasurements($measurements) {
-        $this->measurements = $measurements;
-    }
-    /**
-     * @param string $style
-     */
-    public function setStyle($style) {
-        $this->style = $style;
-    }
-    /**
-     * @param string $origins
-     */
-    public function setOrigins($origins) {
-        $this->origins = $origins;
-    }
-    /**
-     * @param string $signs
-     */
     public function setSigns($signs) {
         $this->signs = $signs;
     }
-    /**
-     * @param string $job
-     */
-    public function setJob($job) {
-        $this->job = $job;
-    }
-    /**
-     * @param string $food
-     */
-    public function setFood($food) {
-        $this->food = $food;
-    }
-    /**
-     * @param string $alcohol
-     */
-    public function setAlcohol($alcohol) {
-        $this->alcohol = $alcohol;
-    }
-    /**
-     * @param string $smoke
-     */
-    public function setSmoke($smoke) {
-        $this->smoke = $smoke;
-    }
-    /**
-     * @param string $under
-     */
+
     public function setUnder($under) {
         $this->under = $under;
     }
-    /**
-     * @param string $titillate
-     */
+
     public function setTitillate($titillate) {
         $this->titillate = $titillate;
     }
-    /**
-     * @param string $inBed
-     */
+
     public function setInBed($inBed) {
         $this->inBed = $inBed;
     }
-    /**
-     * @param string $accessories
-     */
+
     public function setAccessories($accessories) {
         $this->accessories = $accessories;
     }
-    /**
-     * @param string $crispy
-     */
+
     public function setCrispy($crispy) {
         $this->crispy = $crispy;
     }
-    /**
-     * @param string $excites
-     */
+
     public function setExcites($excites) {
         $this->excites = $excites;
     }
-    /**
-     * @param string $hates
-     */
+
     public function setHates($hates) {
         $this->hates = $hates;
     }
-    /**
-     * @param string $vices
-     */
+
     public function setVices($vices) {
         $this->vices = $vices;
     }
-    /**
-     * @param string $fantasies
-     */
+
     public function setFantasies($fantasies) {
         $this->fantasies = $fantasies;
     }
-    /**
-     * @param string $assets
-     */
+
     public function setAssets($assets) {
         $this->assets = $assets;
     }
-    /**
-     * @param string $qualifiers
-     */
+
     public function setQualifiers($qualifiers) {
         $this->qualifiers = $qualifiers;
     }
-    
-    /**
-     *
-     * @param string $movie
-     */
-    public function addMovie($movie){
-        array_push($this->getMovies(), $movie);
-    }
-    /**
-     *
-     * @param string $song
-     */
-    public function addSong($song){
-        array_push($this->getMusic(), $song);
-    }
-    /**
-     *
-     * @param string $book
-     */
-    public function addBook($book){
-        array_push($this->getBooks(), $book);
-    }
-    /**
-     *
-     * @param string $show
-     */
-    public function addTvShow($show){
-        array_push($this->getTvShows(), $show);
-    }
-    /**
-     *
-     * @param string $quote 
-     */
-    public function setQuote($quote) {
-        $this->quote = $quote;
-    }
-
-    /**
-     * @param string $hobbies
-     */
-    public function setHobbies($hobbies){
-        $this->hobbies = $hobbies;
-    }
-
-
 }
 ?>

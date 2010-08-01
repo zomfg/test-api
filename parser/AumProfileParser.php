@@ -9,18 +9,103 @@
  *
  * @author dirk
  */
-class AumProfileParser extends AumParser{
-    
-    public function __construct() {
-        parent::__construct();
-    }
+abstract class AumProfileParser extends AumParser{
 
     /**
      *
      * @param IAumPage $aumPage
      */
     public function parse(IAumPage $aumPage){
-        // parse common stuff to boiz n girls
+        $this->dom->load($aumPage->getHtmlBody());
+        
+        $this->parseAbout($aumPage);
+        $this->parseStats($aumPage);
     }
+
+    /**
+     * @param simple_html_dom_node $likes
+     * @param AumGirlProfilePage $aumPage
+     */
+    protected function parseLikes(simple_html_dom_node $likes, AumProfilePage $aumPage){
+        $likes = $likes->find('text');
+        /*
+         * Hobbies
+           aum
+
+           Musique
+           Cinéma
+
+             un
+             un
+             deux
+             deux
+             trois
+             trois
+
+
+
+
+
+
+
+
+
+          Livres
+          Télé
+
+            un
+            un
+            deux
+            deux
+            trois
+            trois
+         */
+        $music = array();
+        $cinema = array();
+        $books = array();
+        $tv = array();
+
+        for($i = 0 ; $i < count($likes) ; ++$i){
+            $likes[$i]->plaintext = utf8_encode($likes[$i]->plaintext);
+
+            if(stristr($likes[$i]->plaintext, 'hobbies')){
+                $aumPage->setHobbies($likes[++$i]);
+            }
+
+
+            else if(stristr($likes[$i]->plaintext, 'musique')){
+                // parse music and cinema
+                // start after 'Cinéma'
+                for($j = 3 ; !stristr($likes[$i + $j]->plaintext, 'Livres') && $j + $i < count($likes) ; ++$j){
+                    if($j % 2 == 1)
+                        $aumPage->addSong ($likes[$i + $j]->plaintext);
+                    else
+                        $aumPage->addMovie($likes[$i + $j]->plaintext);
+                }
+
+
+            }
+            else if(stristr($likes[$i]->plaintext, 'télé')){
+                // parse books and tv
+                // start after 'Télé'
+                for($j = 2 ; $j + $i < count($likes) ; ++$j){
+                    if($j % 2 == 0)
+                        $aumPage->addBook($likes[$i + $j]->plaintext);
+                    else
+                        $aumPage->addTvShow($likes[$i + $j]->plaintext);
+                }
+            }
+        }
+
+    }
+    
+    /**
+    * @param AumProfilePage $aumPage
+    */
+    protected abstract function parseAbout(AumProfilePage $aumPage);
+    protected abstract function parseStats(AumProfilePage $aumPage);
+    protected abstract function parseDetails(simple_html_dom_node $details, AumProfilePage $aumPage);
+
+
 }
 ?>

@@ -18,16 +18,31 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param IAumPage $aumPage
      */
     public function parse(IAumPage $aumPage){
-        $this->dom->load($aumPage->getHtmlBody());
-
-        $this->parseStats($aumPage);
-        $this->parseAbout($aumPage);
+        parent::parse($aumPage);
     }
 
     /**
+    * @param AumProfilePage $aumPage
+    */
+    protected function parseAbout(AumProfilePage $aumPage){
+        $tmp = $this->dom->find('td[width=225] table td');
+        $aumPage->setName($tmp[0]->plaintext);
+        $aumPage->setQuote($tmp[2]->plaintext);
+
+        $aboutText = $this->dom->find('div[id=about_div]');
+        $aumPage->setAbout(trim($aboutText[0]->plaintext));
+
+        $all = $this->dom->find('table[width=451]');
+
+        $this->parseDetails($all[1], $aumPage);
+        $this->parseLikes($all[2], $aumPage);
+        $this->parseSexo($all[3], $aumPage);
+        $this->parseCharacteristics($all[4], $aumPage);
+    }
+    /**
      * @param AumProfilePage $aumPage
      */
-    private function parseStats(AumProfilePage $aumPage){
+    protected function parseStats(AumProfilePage $aumPage){
         $stats = $this->dom->find('td[class=viewPopu]');
 
        // set the counters
@@ -36,35 +51,13 @@ class AumGirlProfileParser extends AumProfileParser{
        $aumPage->setBasketsCounter(intval(str_replace(' ', '', $stats[2]->nextSibling()->plaintext)));
        $aumPage->setMailsCounter(intval(str_replace(' ', '', $stats[3]->nextSibling()->plaintext)));
        $aumPage->setBonus(intval(str_replace(' ', '', $stats[4]->nextSibling()->nextSibling()->plaintext)));
-
-       
-    }
-
-    /**
-     * @param AumProfilePage $aumPage
-     */
-    private function parseAbout(AumProfilePage $aumPage){
-        $tmp = $this->dom->find('td[width=225] table td');
-        $aumPage->setName($tmp[0]->plaintext);
-        $aumPage->setQuote($tmp[2]->plaintext);
-
-
-        $aboutText = $this->dom->find('div[id=about_div]');
-        $aumPage->setAbout(trim($aboutText[0]->plaintext));
-
-        $all = $this->dom->find('table[width=451]');
-        
-        $this->parseDetails($all[1], $aumPage);
-        $this->parseLikes($all[2], $aumPage);
-        $this->parseSexo($all[3], $aumPage);
-        $this->parseCharacteristics($all[4], $aumPage);
     }
 
     /**
      * @param simple_html_dom_node $details
      * @param AumGirlProfilePage $aumPage
      */
-    private function parseDetails(simple_html_dom_node $details, AumGirlProfilePage $aumPage){
+    protected function parseDetails(simple_html_dom_node $details, AumProfilePage $aumPage){
         $details = $details->find('text');
 
         for($i = 0 ; $i < count($details) ; ++$i){
@@ -113,7 +106,7 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param simple_html_dom_node $likes
      * @param AumGirlProfilePage $aumPage
      */
-    private function parseLikes(simple_html_dom_node $likes, AumGirlProfilePage $aumPage){
+    protected function parseLikes(simple_html_dom_node $likes, AumProfilePage $aumPage){
         $likes = $likes->find('text');
         /*
          * Hobbies
@@ -190,7 +183,7 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param simple_html_dom_node $sexo
      * @param AumGirlProfilePage $aumPage
      */
-    private function parseSexo(simple_html_dom_node $sexo, AumGirlProfilePage $aumPage){
+    protected function parseSexo(simple_html_dom_node $sexo, AumProfilePage $aumPage){
         $sexo = $sexo->find('text');
         
         for($i = 0 ; $i < count($sexo) ; ++$i){
@@ -217,7 +210,7 @@ class AumGirlProfileParser extends AumProfileParser{
      * @param simple_html_dom_node $chars
      * @param AumGirlProfilePage $aumPage
      */
-    private function parseCharacteristics(simple_html_dom_node $chars, AumGirlProfilePage $aumPage){
+    protected function parseCharacteristics(simple_html_dom_node $chars, AumProfilePage $aumPage){
         $chars = $chars->find('text');
 
         for($i = 0 ; $i < count($chars) ; ++$i){
