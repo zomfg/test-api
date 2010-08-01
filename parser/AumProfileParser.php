@@ -16,7 +16,7 @@ abstract class AumProfileParser extends AumParser{
      * @param IAumPage $aumPage
      */
     public function parse(IAumPage $aumPage){
-        $this->dom->load($aumPage->getHtmlBody());
+        parent::parse($aumPage);
         
         $this->parseAbout($aumPage);
         $this->parseStats($aumPage);

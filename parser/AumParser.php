@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-abstract class AumParser implements IAumParser {
+class AumParser implements IAumParser {
     /**
      * @var simple_html_dom
      */
@@ -17,6 +17,10 @@ abstract class AumParser implements IAumParser {
 
     public function __construct() {
         $this->dom = new simple_html_dom();
+    }
+
+    public function parse(IAumPage $aumPage){
+        $this->dom->load($aumPage->getHtmlBody());
     }
 
 }
