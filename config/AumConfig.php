@@ -41,7 +41,7 @@ class AumConfig {
      * @return string
      */
     public function getUrl($aumPage){
-        return $this->arrayConfig['URLs'][get_class($aumPage)];
+        return $this->arrayConfig['pages'][get_class($aumPage)];
     }
     
 

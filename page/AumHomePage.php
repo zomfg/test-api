@@ -22,17 +22,26 @@ class AumHomePage extends AumPage{
      * @var integer
      */
     private $newBasketsCounter = 0;
-
     /**
      * @var integer
      */
     private $basketsCounter = 0;
-
     /**
      * @var integer
      */
     private $popularity = 0;
-    
+    /**
+     * @var AumProfile
+     */
+    private $lastVisitProfile;
+    /**
+     * @var AumProfile
+     */
+    private $lastBasketProfile;
+    /**
+     * @var AumProfile
+     */
+    private $lastMailProfile;
     public function __construct() {
         parent::__construct();
     }
@@ -73,6 +82,28 @@ class AumHomePage extends AumPage{
     }
 
     /**
+     * @return AumProfile
+     */
+    public function getLastVisitProfile() {
+        return $this->lastVisitProfile;
+    }
+
+    /**
+     * @return AumProfile
+     */
+    public function getLastBasketProfile() {
+        return $this->lastBasketProfile;
+    }
+
+    /**
+     * @return AumProfile
+     */
+    public function getLastMailProfile() {
+        return $this->lastMailProfile;
+    }
+
+
+    /**
      * @param integer $newMailsCounter
      */
     public function setNewMailsCounter($newMailsCounter) {
@@ -105,6 +136,27 @@ class AumHomePage extends AumPage{
      */
     public function setPopularity($popularity) {
         $this->popularity = $popularity;
+    }
+
+    /**
+     * @param AumProfile  $lastVisitProfile
+     */
+    public function setLastVisitProfile(AumProfile $lastVisitProfile) {
+        $this->lastVisitProfile = $lastVisitProfile;
+    }
+
+    /**
+     * @param AumProfile $lastBasketProfile
+     */
+    public function setLastBasketProfile(AumProfile $lastBasketProfile) {
+        $this->lastBasketProfile = $lastBasketProfile;
+    }
+
+    /**
+     * @param AumProfile $lastCharmprofile
+     */
+    public function setLastMailProfile(AumProfile $lastMailProfile) {
+        $this->lastMailProfile = $lastMailProfile;
     }
 
 

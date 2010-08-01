@@ -12,7 +12,7 @@ interface IAumPage {
     /**
      * @param IAumParser
      */
-    public function Parse(IAumParser $parser);
+    public function parse(IAumParser $parser);
 
     /**
      * @param string

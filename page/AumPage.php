@@ -40,8 +40,8 @@ class AumPage implements IAumPage{
     /**
      * @param IAumParser $parser
      */
-    public function Parse(IAumParser $parser) {
-        $parser->Parse($this);
+    public function parse(IAumParser $parser) {
+        $parser->parse($this);
     }
 
     /**

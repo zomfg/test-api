@@ -27,7 +27,16 @@ class AumProfile {
      * @var string
      */
     private $pictureUrl;
-    
+
+    /**
+     * @var string
+     */
+    private $city;
+
+    /**
+     * @var integer
+     */
+    private $age;
     function __construct() {
 
     }
@@ -55,6 +64,20 @@ class AumProfile {
     }
 
     /**
+     * @return string
+     */
+    public function getCity() {
+        return $this->city;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getAge() {
+        return $this->age;
+    }
+
+    /**
      * @param string $name
      */
     public function setName($name) {
@@ -74,6 +97,21 @@ class AumProfile {
     public function setPictureUrl($pictureUrl) {
         $this->pictureUrl = $pictureUrl;
     }
+
+    /**
+     * @param string $city 
+     */
+    public function setCity($city) {
+        $this->city = $city;
+    }
+
+    /**
+     * @param integer $age
+     */
+    public function setAge($age) {
+        $this->age = $age;
+    }
+
 
 
 }

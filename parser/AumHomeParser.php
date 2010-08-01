@@ -22,7 +22,6 @@ class AumHomeParser extends AumParser{
         $this->dom->load($aumPage->getHtmlBody());
 
         $this->parseNumbers($aumPage);
-        $this->parseLastEvents($aumPage);
         $this->parseMiniatures($aumPage);
     }
 
@@ -34,25 +33,14 @@ class AumHomeParser extends AumParser{
         $newMails = $this->dom->find('span[id=mailsCounter]', 0);
         $newVisits = $this->dom->find('span[id=visitesCounter]', 0);
         $newBaskets = $this->dom->find('span[id=flashsCounter]', 0);
-        $baskets = $this->dom->find('big[id=basketCount', 0);
+        $baskets = $this->dom->find('big[id=basketCount]', 0);
         $popularity = $this->dom->find('big[id=popScore]', 0);
         
-        $aumPage->setNewMailsCounter($newMails);
-        $aumPage->setNewBasketsCounter($newBaskets);
-        $aumPage->setNewVisitsCounter($newVisits);
-        $aumPage->setBasketsCounter($baskets);
-        $aumPage->setPopularity($popularity);
-    }
-
-    /**
-     * @param AumHomePage $aumPage 
-     */
-    private function parseLastEvents(AumHomePage $aumPage){
-       $lastEvents = $this->dom->find('[class]');
-       print_r($lastEvents);
-       foreach($lastEvents as $event){
-           echo $event;
-       }
+        $aumPage->setNewMailsCounter($newMails->plaintext);
+        $aumPage->setNewBasketsCounter($newBaskets->plaintext);
+        $aumPage->setNewVisitsCounter($newVisits->plaintext);
+        $aumPage->setBasketsCounter($baskets->plaintext);
+        $aumPage->setPopularity($popularity->plaintext);
     }
     
     /**

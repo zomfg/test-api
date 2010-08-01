@@ -15,10 +15,16 @@ class AumHomeFactory extends AbstractAumFactory {
 
     }
 
+    /**
+     * @return AumHomePage
+     */
     public function createPage(){
         return new AumHomePage();
     }
 
+    /**
+     * @return AumHomeParser
+     */
     public function createParser(){
         return new AumHomeParser();
     }

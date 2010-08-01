@@ -14,10 +14,16 @@ class AumMailFactory extends AbstractAumFactory {
 
     }
 
+    /**
+     * @return AumMailPage
+     */
     public function createPage(){
         return new AumMailPage();
     }
 
+    /**
+     * @return AumMailParser 
+     */
     public function createParser(){
         return new AumMailParser();
     }

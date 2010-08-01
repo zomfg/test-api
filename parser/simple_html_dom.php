@@ -469,7 +469,7 @@ class simple_html_dom_node {
     function getElementByTagName($name) {return $this->find($name, 0);}
     function getElementsByTagName($name, $idx=null) {return $this->find($name, $idx);}
     function parentNode() {return $this->parent();}
-    function childNodes($idx=-1) {return $this->children($idx);}
+    function childNodes($idx=-1) {return $this->childrefn($idx);}
     function firstChild() {return $this->first_child();}
     function lastChild() {return $this->last_child();}
     function nextSibling() {return $this->next_sibling();}
