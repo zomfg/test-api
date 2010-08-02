@@ -81,7 +81,7 @@ class AumGirlProfilePage extends AumProfilePage {
 
     
     public function __construct() {
-        parent::__construct();
+        
     }
 
     /**

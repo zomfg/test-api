@@ -12,7 +12,7 @@
 class AumMailParser extends AumParser{
 
     public function __construct() {
-        parent::__construct();
+        
     }
 
     /**

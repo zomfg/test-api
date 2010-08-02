@@ -11,19 +11,19 @@
  */
 class AumBasketPage extends AumPage{
 
-    private $visitors = array();
+    private $products = array();
 
     function __construct() {
-        parent::__construct();
+        
     }
     
-    public function &getVisitors() {
+    public function &getProducts() {
         return $this->visitors;
     }
 
-        public function addVisitor($url, $name, $age, $city, $thumb){
+        public function addProduct($url, $name, $age, $city, $thumb){
         
-        array_push($this->visitors, array('url'   => $url,
+        array_push($this->products, array('url'   => $url,
                                           'name'  => $name,
                                           'age'   => $age,
                                           'city'  => $city,

@@ -9,20 +9,13 @@
  *
  * @author dirk
  */
-class AumPage implements IAumPage{
+abstract class AumPage implements IAumPage{
 
     /**
      * @var string
      */
     protected $htmlBody;
     
-    /**
-     * @param string $htmlCode
-     */
-    function __construct() {
-        
-    }
-
     /**
      * @return string
      */

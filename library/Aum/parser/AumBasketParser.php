@@ -12,7 +12,7 @@
 class AumBasketParser extends AumParser{
     
     public function __construct() {
-        parent::__construct();
+        
     }
 
     /**
@@ -41,7 +41,7 @@ class AumBasketParser extends AumParser{
                 $age = $ageAndCity[0];
                 $city = $ageAndCity[1];
 
-                $aumPage->addVisitor($url, $name, $age, $city, $thumb);
+                $aumPage->addProduct($url, $name, $age, $city, $thumb);
                 echo "\n\n\n\n\n\n\n";
             }
         }

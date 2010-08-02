@@ -11,7 +11,7 @@
  */
 class AumChatPage extends AumPage{
     function __construct() {
-        parent::__construct();
+        
     }
 
 }

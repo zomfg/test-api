@@ -17,7 +17,7 @@ class AumMailPage extends AumPage{
     private $threadsUrl;
 
     public function __construct() {
-        parent::__construct();
+        
     }
 
     /**

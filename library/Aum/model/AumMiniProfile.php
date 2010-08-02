@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-class AumProfile {
+class AumMiniProfile {
     /**
      *
      * @var string
@@ -37,8 +37,21 @@ class AumProfile {
      * @var integer
      */
     private $age;
-    function __construct() {
 
+    /**
+     *
+     * @param string $name
+     * @param integer $age
+     * @param string $city
+     * @param string $pictureUrl
+     * @param boolean $online
+     */
+    public function __construct($name, $age, $city, $pictureUrl, $online) {
+        $this->setAge($age);
+        $this->setName($name);
+        $this->setCity($city);
+        $this->setPictureUrl($pictureUrl);
+        $this->setOnline($online);
     }
 
     
