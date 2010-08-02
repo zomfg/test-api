@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-class AumProfilePage extends AumPage{
+abstract class AumProfilePage extends AumPage{
 
     /**
      * @var integer
@@ -108,10 +108,6 @@ class AumProfilePage extends AumPage{
      * @var array
      */
     private $secondaryPhotoThumbs = array();
-    
-    function __construct() {
-        parent::__construct();
-    }
 
     public function getVisitsCounter() {
         return $this->visitsCounter;

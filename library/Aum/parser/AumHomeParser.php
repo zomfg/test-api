@@ -12,7 +12,7 @@
 class AumHomeParser extends AumParser{
 
     public function __construct() {
-        parent::__construct();
+        
     }
 
     /**

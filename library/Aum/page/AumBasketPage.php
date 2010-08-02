@@ -11,24 +11,30 @@
  */
 class AumBasketPage extends AumPage{
 
-    private $visitors = array();
-
+    private $products = array();
+    private $contacts = array();
+    
     function __construct() {
-        parent::__construct();
+        
     }
     
-    public function &getVisitors() {
-        return $this->visitors;
+    public function &getProducts() {
+        return $this->products;
     }
 
-        public function addVisitor($url, $name, $age, $city, $thumb){
+        public function addProduct(AumMiniProfile $product){
         
-        array_push($this->visitors, array('url'   => $url,
-                                          'name'  => $name,
-                                          'age'   => $age,
-                                          'city'  => $city,
-                                          'thumb' => $thumb
-                                         ));
+        array_push($this->getProducts(), $product);
     }
+
+    public function &getContacts() {
+        return $this->contacts;
+    }
+
+    public function addContact(AumMiniProfile $contact){
+        array_push($this->getContacts(), $contact);
+    }
+
+
 }
 ?>

@@ -11,7 +11,7 @@
  */
 class AumCharmPage extends AumPage{
     function __construct() {
-        parent::__construct();
+        
     }
 
 }

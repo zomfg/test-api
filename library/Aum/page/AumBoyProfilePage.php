@@ -24,7 +24,7 @@ class AumBoyProfilePage extends AumProfilePage{
     private $locomotion = '';
     
     public function __construct(){
-        parent::__construct();
+        
     }
 
     public function getPopularity() {

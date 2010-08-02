@@ -43,7 +43,7 @@ class AumHomePage extends AumPage{
      */
     private $lastMailProfile;
     public function __construct() {
-        parent::__construct();
+        
     }
 
     /**

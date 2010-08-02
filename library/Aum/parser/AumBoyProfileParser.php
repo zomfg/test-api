@@ -11,7 +11,7 @@
  */
 class AumBoyProfileParser extends AumProfileParser{
     public function __construct() {
-        parent::__construct();
+        
     }
     /**
      *
