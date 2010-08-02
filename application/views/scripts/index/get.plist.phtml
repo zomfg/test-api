@@ -1,0 +1,40 @@
+<?='<?xml version="1.0" encoding="UTF-8"?>'?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http:// www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<key>Label</key>
+<string>com.mortbay.jetty</string>
+<key>ServiceDescription</key>
+<string>Jetty JSP Container</string>
+<key>OnDemand</key>
+<false/>
+<key>WorkingDirectory</key>
+<string>/Library/Jetty/Current</string>
+<key>EnvironmentVariables</key>
+<dict>
+<key>JETTY_HOME</key>
+<string>/Library/Jetty/Current</string>
+<key>JAVA_HOME</key>
+<string>/Library/Java/Home</string>
+</dict>
+<key>ProgramArguments</key>
+<array>
+<string>/usr/bin/java</string>
+<string>-jar</string>
+<string>/Library/Jetty/Current/start.jar</string>
+<string>/Library/Jetty/Current/etc/jetty.xml</string>
+</array>
+<key>Sockets</key>
+<dict>
+<key>Listeners</key>
+<dict>
+<key>SockServiceName</key>
+<integer>8808</integer>
+<key>Bonjour</key>
+<false/>
+</dict>
+</dict>
+<key>UserName</key>
+<string>servlet</string>
+</dict>
+</plist>
