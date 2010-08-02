@@ -14,30 +14,34 @@ class AumMiniProfile {
      *
      * @var string
      */
-    private $name;
+    private $name = '';
 
     /**
      *
      * @var boolean
      */
-    private $online;
+    private $online = false;
 
     /**
      *
      * @var string
      */
-    private $pictureUrl;
+    private $pictureUrl = '';
 
     /**
      * @var string
      */
-    private $city;
+    private $city = '';
 
     /**
      * @var integer
      */
-    private $age;
-
+    private $age = 0;
+    /**
+     *
+     * @var string
+     */
+    private $url = '';
     /**
      *
      * @param string $name
@@ -46,7 +50,7 @@ class AumMiniProfile {
      * @param string $pictureUrl
      * @param boolean $online
      */
-    public function __construct($name, $age, $city, $pictureUrl, $online) {
+    public function __construct($name, $age, $city, $pictureUrl, $url, $online) {
         $this->setAge($age);
         $this->setName($name);
         $this->setCity($city);

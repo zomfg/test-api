@@ -35,13 +35,17 @@ class AumBasketParser extends AumParser{
                 $name = $url->title;
                 $url = $url->href;
 
-                $ageAndCity = end(preg_split('[\-]', $visitor->find('div a', 0)->innertext));
+                $ageAndCity = preg_split('[-]', $visitor->find('div a', 0)->innertext);
+                $ageAndCity = $ageAndCity[1];
                 $ageAndCity = preg_split('[\<br\s\/\>]', $ageAndCity);
-
+                
                 $age = $ageAndCity[0];
                 $city = $ageAndCity[1];
-
-                $aumPage->addProduct($url, $name, $age, $city, $thumb);
+                $online = $visitor->find('comment', 0) != null;
+                echo $online ? "online" : "offline";
+                $product = new AumMiniProfile($name, $age, $city, $thumb, $url, $online);
+                $aumPage->addProduct($product);
+                
                 echo "\n\n\n\n\n\n\n";
             }
         }

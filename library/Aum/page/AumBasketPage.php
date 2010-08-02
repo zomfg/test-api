@@ -21,14 +21,9 @@ class AumBasketPage extends AumPage{
         return $this->visitors;
     }
 
-        public function addProduct($url, $name, $age, $city, $thumb){
+        public function addProduct($product){
         
-        array_push($this->products, array('url'   => $url,
-                                          'name'  => $name,
-                                          'age'   => $age,
-                                          'city'  => $city,
-                                          'thumb' => $thumb
-                                         ));
+        array_push($this->products, $product);
     }
 }
 ?>
