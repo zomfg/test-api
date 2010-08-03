@@ -22,6 +22,7 @@ class Aum_Page_Profile_Boy extends Aum_Page_Profile_Abstract{
     private $extra = '';
     private $pets = '';
     private $locomotion = '';
+    private $stars = array();
     
     public function __construct(){
         
@@ -122,7 +123,9 @@ class Aum_Page_Profile_Boy extends Aum_Page_Profile_Abstract{
         $this->locomotion = $locomotion;
     }
 
-
+    public function addStar($starId, $starValue){
+        $this->stars[$starId] = $starValue;
+    }
 
 }
 ?>
