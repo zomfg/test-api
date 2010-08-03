@@ -5,28 +5,28 @@
  */
 
 /**
- * Description of AumBasketParserFactory
+ * Description of AumGirlBasketFactory
  *
  * @author dirk
  */
-class AumBasketFactory extends AbstractAumFactory{
+class AumGirlBasketFactory extends AbstractAumFactory{
     function __construct() {
         
     }
 
 
     /**
-     * @return AumBasketPage
+     * @return AumGirlBasketPage
      */
     public function createPage(){
-        return new AumBasketPage();
+        return new AumGirlBasketPage();
     }
 
     /**
-     * @return AumBasketParser
+     * @return AumGirlBasketParser
      */
     public function createParser(){
-        return new AumBasketParser();
+        return new AumGirlBasketParser();
     }
 
 }

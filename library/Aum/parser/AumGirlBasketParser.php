@@ -5,11 +5,11 @@
  */
 
 /**
- * Description of AumBasketParser
+ * Description of AumGirlBasketParser
  *
  * @author dirk
  */
-class AumBasketParser extends AumParser{
+class AumGirlBasketParser extends AumParser{
     
     public function __construct() {
         
@@ -36,6 +36,7 @@ class AumBasketParser extends AumParser{
         for($i = 0 ; $i < count($elems) ; ++$i){
             // only take 1/2
             if($i % 2 == 0){
+                
                 $product = $this->parseVisitor($elems[$i]);
                 $aumPage->addProduct($product);
             }
@@ -48,6 +49,7 @@ class AumBasketParser extends AumParser{
         for($i = 0 ; $i < count($elems) ; ++$i){
             // only take 1/2
             if($i % 2 == 0){
+                
                 $contact = $this->parseVisitor($elems[$i]);
                 $aumPage->addContact($contact);
             }
@@ -69,7 +71,7 @@ class AumBasketParser extends AumParser{
         $age = $ageAndCity[0];
         $city = $ageAndCity[1];
         $online = $visitor->find('comment', 0) != null;
-
+        
         return new AumMiniProfile($name, $age, $city, $thumb, $url, $online);
         
     }

@@ -1,31 +1,33 @@
 <?php
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
 /**
- * Description of AumBoyProfileFactory
+ * Description of AumBoyBasketFactory
  *
  * @author dirk
  */
-class AumBoyProfileFactory {
+class AumBoyBasketFactory extends AbstractAumFactory{
     function __construct() {
 
     }
 
+
     /**
-     * @return AumBoyProfilePage
+     * @return AumBoyBasketPage
      */
     public function createPage(){
-        return new AumBoyProfilePage();
+        return new AumBoyBasketPage();
     }
 
     /**
-     * @return AumBoyProfileParser
+     * @return AumBoyBasketParser
      */
     public function createParser(){
-        return new AumBoyProfileParser();
+        return new AumBoyBasketParser();
     }
+
 }
 ?>

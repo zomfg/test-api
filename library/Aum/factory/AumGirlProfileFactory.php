@@ -5,7 +5,7 @@
  */
 
 /**
- * Description of AumProfileFactory
+ * Description of AumGirlProfileFactory
  *
  * @author dirk
  */

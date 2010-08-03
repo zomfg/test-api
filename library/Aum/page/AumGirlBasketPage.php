@@ -5,11 +5,11 @@
  */
 
 /**
- * Description of AumBasketPage
+ * Description of AumGirlBasketPage
  *
  * @author dirk
  */
-class AumBasketPage extends AumPage{
+class AumGirlBasketPage extends AumPage{
 
     private $products = array();
     private $contacts = array();
