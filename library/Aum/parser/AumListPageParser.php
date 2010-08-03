@@ -29,7 +29,7 @@ class AumListPageParser extends AumParser {
                 $picture = substr_replace(stristr($visit->find('div[class=small_picture]', 0)->style, 'http://'), '', -1);
                 $online = $visit->find('div[class=small_picture_online]', 0) != null;
                 $visitor = new AumMiniProfile($name, $age, $city, $picture, $url, $online);
-                echo $visit;
+
                 $aumPage->addVisitor($visitor);
             }
         }

@@ -15,14 +15,14 @@ class AumBoyProfileFactory {
     }
 
     /**
-     * @return AumProfilePage
+     * @return AumBoyProfilePage
      */
     public function createPage(){
         return new AumBoyProfilePage();
     }
 
     /**
-     * @return AumProfileParser
+     * @return AumBoyProfileParser
      */
     public function createParser(){
         return new AumBoyProfileParser();
