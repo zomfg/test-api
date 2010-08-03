@@ -5,16 +5,25 @@ class IndexController extends Zend_Controller_Action {
 
                 //test_profile_girl();
 		echo '-------------------------------------<br/>';
-		test_profile_boy();
+		//test_profile_boy();
 		//test_basket();
 		
 		//test_visits();
 		//test_charms();
 		//test_mails();
+                test_xml();
     }
 }
 
 
+function test_xml(){
+    
+    $xml =file_get_contents('/Users/dirk/Documents/AUM/API/test-api/basket.xml');
+
+    $xml = html_entity_decode($xml);
+    file_put_contents($filename, $data)
+    $produits = simplexml_load_file('/Users/dirk/Documents/AUM/API/test-api/basket.xml');
+}
 
 
 function test_charms(){
