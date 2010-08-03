@@ -26,12 +26,12 @@ class AumMailParser extends AumParser{
         //echo $mails;
         
         foreach($mails as $mail){
-            $this->parseMail($mail);
+            $this->parseMail($aumPage, $mail);
         }
     }
 
 
-    public function parseMail(simple_html_dom_node $mail){
+    public function parseMail(AumMailPage $aumPage, simple_html_dom_node $mail){
         $url = $mail->find('td[class=a]', 1)->onclick;
         $pic = $mail->find('td[class=a] table tr td', 0)->style;
         $online = $mail->find('td[class=a] table img', 0) != null;
@@ -40,17 +40,17 @@ class AumMailParser extends AumParser{
         $ageCity = preg_split('[\n]', $mail->find('td[class=a]', 2)->plaintext);
         $ageCity = preg_split('[,]', $ageCity[1]);
         $age = $ageCity[0];
+        $city = '';
         // shit message d'aum
         if(count($ageCity) > 1)
             $city = $ageCity[1];
 
-        $threadUrl = $mail->find('td[class=a]', 3)->onclick;
+        $threadUrl = substr_replace(stristr($mail->find('td[class=a]', 3)->onclick, '/'), '', -1);
         $subjectTime = preg_split('[\n]', $mail->find('td[class=a]', 3)->plaintext);
         $subject = $subjectTime[0];
         $time = $subjectTime[1];
-
-        //echo $mail;
-        echo "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+        
+        $aumPage->addThread(new AumMiniProfile($name, $age, $city, $pic, $url, null), $threadUrl, $subject, $time);
     }
 
 }

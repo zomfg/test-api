@@ -14,7 +14,7 @@ class AumMailPage extends AumPage{
     /**
      * @var array
      */
-    private $threadsUrl;
+    private $visitorThreads = array();
 
     public function __construct() {
         
@@ -23,15 +23,19 @@ class AumMailPage extends AumPage{
     /**
      * @return array
      */
-    public function getThreadsUrl() {
-        return $this->threadsUrl;
+    public function getThreads() {
+        return $this->$visitorThreads;
     }
 
     /**
-     * @param array $threadsUrl
+     * @param array $threads
      */
-    public function setThreadsUrl($threadsUrl) {
-        $this->threadsUrl = $threadsUrl;
+    public function addThread($visitor, $thread, $subject, $time) {
+        array_push($this->visitorThreads, array('contact' => $visitor,
+                                                'thread_url' => $thread,
+                                                'subject' => $subject,
+                                                'time' => $time
+                                                ));
     }
 
 
