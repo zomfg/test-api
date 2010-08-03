@@ -37,7 +37,9 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
         $this->parseDetails($all[0], $aumPage);
         $this->parseLikes($all[1], $aumPage);
         $this->parseAccessories($all[2], $aumPage);
+        $this->parseStars();
     }
+
 
     /**
      * @param AumProfilePage $aumPage
@@ -139,6 +141,15 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
         }
     }
 
+    private function parseStars(){
+        $scripts = $this->dom->find('script');
+        $i = 0;
+        
+        foreach($scripts as $script){
+            if(strpos($script->innertext, 'new stars') === true){
 
+            }
+        }
+    }
 }
 ?>

@@ -3,14 +3,14 @@
 class IndexController extends Zend_Controller_Action {
     public function indexAction() {
 
-                test_profile_girl();
+                //test_profile_girl();
 		echo '-------------------------------------<br/>';
 		test_profile_boy();
-		test_basket();
+		//test_basket();
 		
-		test_visits();
-		test_charms();
-		test_mails();
+		//test_visits();
+		//test_charms();
+		//test_mails();
     }
 }
 
