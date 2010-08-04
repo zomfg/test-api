@@ -20,7 +20,7 @@ function test_xml(){
     $fact = new Aum_Factory_NewCharm();
     $page = $fact->createPage();
     $parser = $fact->createParser();
-    $page->setHtmlBody(file_get_contents('/Users/dirk/Documents/AUM/API/test-api/basket.xml'));
+    $page->setHtmlBody(file_get_contents(APPLICATION_PATH.'/../basket.xml'));
 
     $page->parse($parser);
 
@@ -32,7 +32,7 @@ function test_charms(){
     $fact = new Aum_Factory_List();
     $page = $fact->createPage();
     $parser = $fact->createParser();
-    $page->setHtmlBody(file_get_contents('/Users/dirk/Documents/AUM/API/test-api/test_charms_girl.html'));
+    $page->setHtmlBody(file_get_contents(APPLICATION_PATH.'/../test_charms_girl.html'));
 
     $page->parse($parser);
 }
@@ -41,7 +41,7 @@ function test_mails(){
     $fact = new Aum_Factory_Mail();
     $page = $fact->createPage();
     $parser = $fact->createParser();
-    $page->setHtmlBody(file_get_contents('/Users/dirk/Documents/AUM/API/test-api/test_mail.html'));
+    $page->setHtmlBody(file_get_contents(APPLICATION_PATH.'/../test_mail.html'));
 
     $page->parse($parser);
 }
@@ -50,7 +50,7 @@ function test_visits(){
     $fact = new Aum_Factory_List();
     $page = $fact->createPage();
     $parser = $fact->createParser();
-    $page->setHtmlBody(file_get_contents('/Users/dirk/Documents/AUM/API/test-api/test_visits_boy.html'));
+    $page->setHtmlBody(file_get_contents(APPLICATION_PATH.'/../test_visits_boy.html'));
 
     $page->parse($parser);
 }
@@ -60,7 +60,7 @@ function test_basket(){
     $fact = new Aum_Factory_Basket_Boy();
     $page = $fact->createPage();
     $parser = $fact->createParser();
-    $page->setHtmlBody(file_get_contents('/Users/dirk/Documents/AUM/API/test-api/test_basket_boy.html'));
+    $page->setHtmlBody(file_get_contents(APPLICATION_PATH.'/../test_basket_boy.html'));
 
     $page->parse($parser);
 
@@ -71,7 +71,7 @@ function test_profile_girl(){
          $fact = new Aum_Factory_Profile_Girl();
         $page = $fact->createPage();
         $parser = $fact->createParser();
-        $page->setHtmlBody(file_get_contents("/Users/dirk/Documents/AUM/API/test-api/test_profile_nana.html"));
+        $page->setHtmlBody(file_get_contents("APPLICATION_PATH.'/../test_profile_nana.html"));
         $page->Parse($parser);
 
         echo "Nom: " . $page->getName() . "<br/>";
@@ -132,7 +132,7 @@ function test_profile_boy(){
          $fact = new Aum_Factory_Profile_Boy();
         $page = $fact->createPage();
         $parser = $fact->createParser();
-        $page->setHtmlBody(file_get_contents("/Users/dirk/Documents/AUM/API/test-api/test_profile_mec2.html"));
+        $page->setHtmlBody(file_get_contents("APPLICATION_PATH.'/../test_profile_mec2.html"));
         $page->Parse($parser);
 
         echo "Nom: " . $page->getName() . "<br/>";
