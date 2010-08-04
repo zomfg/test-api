@@ -11,8 +11,6 @@
  * @author dirk
  */
 class Aum_Page_Profile_Girl extends Aum_Page_Profile_Abstract {
-
-
     /**
      * @var integer
      */
@@ -81,7 +79,7 @@ class Aum_Page_Profile_Girl extends Aum_Page_Profile_Abstract {
 
     
     public function __construct() {
-        
+        $this->configPageKey = 'profile';
     }
 
     /**
@@ -123,28 +121,28 @@ class Aum_Page_Profile_Girl extends Aum_Page_Profile_Abstract {
      * @return integer
      */
     public function getVisitsPoints() {
-        return $this->getVisitsCounter() * Aum_Config::Config()->getVisitValue();
+        return $this->getVisitsCounter() * Aum_Config::get()->aum->value->visit;
     }
 
     /**
      * @return integer
      */
     public function getCharmsPoints() {
-        return $this->getCharmsCounter() * Aum_Config::Config()->getCharmValue();
+        return $this->getCharmsCounter() * Aum_Config::get()->aum->value->charm;
     }
 
     /**
      * @return integer
      */
     public function getBasketsPoints() {
-        return $this->getBaskEtsCounter() * Aum_Config::Config()->getBasketValue();
+        return $this->getBaskEtsCounter() * Aum_Config::get()->aum->value->basket;
     }
 
     /**
      * @return integer
      */
     public function getMailsPoints() {
-        return $this->getMailsCounter() * Aum_Config::Config()->getMailValue();
+        return $this->getMailsCounter() * Aum_Config::get()->aum->value->mail;
     }
 
     /**
@@ -323,6 +321,11 @@ class Aum_Page_Profile_Girl extends Aum_Page_Profile_Abstract {
 
     public function setQualifiers($qualifiers) {
         $this->qualifiers = $qualifiers;
+    }
+
+    public function toArray() {
+        $data = array();
+        return $data;
     }
 }
 ?>

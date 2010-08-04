@@ -9,13 +9,13 @@
  *
  * @author dirk
  */
-class Aum_Page_Basket_Girl extends Aum_Page_Abstract{
+class Aum_Page_Basket_Girl extends Aum_Page_Abstract {
 
     private $products = array();
     private $contacts = array();
     
     public function __construct() {
-        
+        $this->configPageKey = 'basket';
     }
     
     public function getProducts() {
@@ -32,6 +32,11 @@ class Aum_Page_Basket_Girl extends Aum_Page_Abstract{
 
     public function addContact(Aum_Model_MiniProfile $contact){
         array_push($this->contacts, $contact);
+    }
+
+    public function toArray() {
+        $data = array();
+        return $data;
     }
 }
 ?>

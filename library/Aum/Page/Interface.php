@@ -23,5 +23,10 @@ interface Aum_Page_Interface {
      * @return string
      */
     public function getHtmlBody();
+
+    /**
+     * @return array
+     */
+    public function toArray();
 }
 ?>

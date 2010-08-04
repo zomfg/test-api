@@ -42,8 +42,9 @@ class Aum_Page_Home extends Aum_Page_Abstract{
      * @var Aum_Page_Profile_Abstract
      */
     private $lastMailProfile;
+
     public function __construct() {
-        
+        $this->configPageKey = 'home';
     }
 
     /**
@@ -159,7 +160,16 @@ class Aum_Page_Home extends Aum_Page_Abstract{
         $this->lastMailProfile = $lastMailProfile;
     }
 
-
-
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $data = array();
+        $data['popularity'] = $this->getPopularity();
+        $data['counter']['visit'] = $this->getNewVisitsCounter();
+        $data['counter']['mail'] = $this->getNewMailsCounter();
+        $data['counter']['basket'] = $this->getNewBasketsCounter();
+        return $data;
+    }
 }
 ?>

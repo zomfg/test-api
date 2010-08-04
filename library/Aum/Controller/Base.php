@@ -25,8 +25,13 @@ class Aum_Controller_Base extends Zend_Controller_Action {
      */
     protected $httpErrorCode = 500;
 
+    /**
+     * @var Aum_Model_User
+     */
+    protected $aumUser = null;
+
     public function init() {
-        $this->config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/api.ini', APPLICATION_ENV);
+        $this->config = Aum_Config::get();
         $this->authenticate();
         if ($this->isAuthenticated())
             $this->aumClient = new Aum_Client_Http($this->config);
@@ -56,6 +61,10 @@ class Aum_Controller_Base extends Zend_Controller_Action {
     protected function authenticate() {
         if (!($receivedSignature = $this->getRequest()->getParam($this->config->api->security->authKey)))
             return false;
+        if (!($login = $this->getRequest()->getParam($this->config->api->security->loginKey)))
+            return false;
+        if (!($password = $this->getRequest()->getParam($this->config->api->security->passwordKey)))
+            return false;
         $skipParams = array(
             $this->getRequest()->getActionKey(),
             $this->getRequest()->getControllerKey(),
@@ -72,8 +81,11 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         Zend_Debug::dump($data);
         Zend_Debug::dump($receivedSignature);
         Zend_Debug::dump($computedSignature);
-        if ($computedSignature == $receivedSignature)
-            $this->authenticated = true;
+        if ($computedSignature == $receivedSignature) {
+            $this->aumUser = new Aum_Model_User($login, $password);
+            // TODO peut mieux faire o:
+            $this->authenticated = $this->aumClient->login($this->aumUser);
+        }
         return $this->authenticated;
     }
 

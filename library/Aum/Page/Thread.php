@@ -14,7 +14,7 @@ class Aum_Page_Thread extends Aum_Page_Abstract{
     private $messages = array();
 
     function __construct() {
-
+        $this->configPageKey = 'thread';
     }
     
     public function getContact() {
@@ -31,6 +31,11 @@ class Aum_Page_Thread extends Aum_Page_Abstract{
 
     public function getMessages(){
         return $this->messages;
+    }
+
+    public function toArray() {
+        $data = array();
+        return $data;
     }
 }
 ?>

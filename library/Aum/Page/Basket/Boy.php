@@ -9,12 +9,12 @@
  *
  * @author dirk
  */
-class Aum_Page_Basket_Boy extends Aum_Page_Abstract{
+class Aum_Page_Basket_Boy extends Aum_Page_Abstract {
 
     private $girls = array();
 
     public function __construct() {
-
+        $this->configPageKey = 'basket';
     }
 
     public function getGirls() {
@@ -26,7 +26,9 @@ class Aum_Page_Basket_Boy extends Aum_Page_Abstract{
         echo "added";
     }
 
-
-
+    public function toArray() {
+        $data = array();
+        return $data;
+    }
 }
 ?>

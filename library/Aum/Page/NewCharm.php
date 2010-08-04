@@ -9,11 +9,11 @@
  *
  * @author dirk
  */
-class Aum_Page_NewCharm  extends Aum_Page_Abstract{
+class Aum_Page_NewCharm  extends Aum_Page_Abstract {
     private $guys = array();
     
     public function __construct() {
-
+        $this->configPageKey = 'newCharm';
     }
 
     /**
@@ -29,6 +29,11 @@ class Aum_Page_NewCharm  extends Aum_Page_Abstract{
 
     public function getGuys(){
         return $this->guys;
+    }
+
+    public function toArray() {
+        $data = array();
+        return $data;
     }
 }
 ?>

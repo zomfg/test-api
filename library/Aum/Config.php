@@ -11,71 +11,14 @@
  */
 class Aum_Config {
     /**
-     * @var array
+     * @staticvar Zend_Config $config
+     * @return Zend_Config
      */
-    private $iniArray = null;
-
-    /**
-     * @var Aumconfig
-     */
-    private static $config = null;
-
-
-    public function __construct(){
-        $this->iniArray = parse_ini_file('config/config.ini', true);
-    }
-    
-    /**
-     * @return AumConfig
-     */
-    public static function Config(){
-        if(self::$config == null)
-            self::$config = new self();
-        return self::$config;
-    }
-
-    /**
-     * @param AumPage $aumPage
-     * @return string
-     */
-    public function getUrl($aumPage){
-        return $this->iniArray['pages'][get_class($aumPage)];
-    }
-
-    /**
-     * @return integer
-     */
-    public function getCharmValue(){
-        return $this->iniArray["values"]["charm"];
-    }
-
-    /**
-     * @return integer
-     */
-    public function getVisitValue(){
-        return $this->iniArray["values"]["visit"];
-    }
-
-    /**
-     * @return integer
-     */
-    public function getMailValue(){
-        return $this->iniArray["values"]["mail"];
-    }
-
-    /**
-     * @return integer
-     */
-    public function getBasketValue(){
-        return $this->iniArray["values"]["basket"];
-    }
-
-    /**
-     * @param string $aumAction
-     * @return string
-     */
-    public function getActionUrl($aumAction) {
-        return $this->arrayConfig['actions'][$aumAction];
+    public static function get() {
+        static $config = null;
+        if ($config == null)
+            $config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/api.ini', APPLICATION_ENV);
+        return $config;
     }
 }
 ?>

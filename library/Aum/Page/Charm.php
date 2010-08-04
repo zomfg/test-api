@@ -11,8 +11,12 @@
  */
 class Aum_Page_Charm extends Aum_Page_Abstract{
     public function __construct() {
-        
+        $this->configPageKey = 'charm';
     }
 
+    public function toArray() {
+        $data = array();
+        return $data;
+    }
 }
 ?>

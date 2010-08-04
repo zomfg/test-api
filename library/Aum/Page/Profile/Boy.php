@@ -25,7 +25,7 @@ class Aum_Page_Profile_Boy extends Aum_Page_Profile_Abstract{
     private $stars = array();
     
     public function __construct(){
-        
+        $this->configPageKey = 'profile';
     }
 
     public function getPopularity() {
@@ -127,5 +127,9 @@ class Aum_Page_Profile_Boy extends Aum_Page_Profile_Abstract{
         $this->stars[$starId] = $starValue;
     }
 
+    public function toArray() {
+        $data = array();
+        return $data;
+    }
 }
 ?>

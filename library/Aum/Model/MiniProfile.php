@@ -9,21 +9,18 @@
  *
  * @author dirk
  */
-class Aum_Model_MiniProfile {
+class Aum_Model_MiniProfile implements Aum_Model_Interface {
     /**
-     *
      * @var string
      */
     private $name = '';
 
     /**
-     *
      * @var boolean
      */
     private $online = false;
 
     /**
-     *
      * @var string
      */
     private $pictureUrl = '';
@@ -38,7 +35,6 @@ class Aum_Model_MiniProfile {
      */
     private $age = 0;
     /**
-     *
      * @var string
      */
     private $url = '';
@@ -129,7 +125,9 @@ class Aum_Model_MiniProfile {
         $this->age = $age;
     }
 
-
-
+    public function toArray() {
+        $data = array();
+        return $data;
+    }
 }
 ?>

@@ -9,8 +9,7 @@
  *
  * @author dirk
  */
-abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract{
-
+abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract {
     /**
      * @var integer
      */
@@ -321,6 +320,10 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract{
      */
     public function addSecondaryPhotoThumb($secondaryPhotoThumb) {
         array_push($this->secondaryPhotoThumbs, $secondaryPhotoThumb);
+    }
+
+    protected function  getPageUrlKey() {
+        return 'profile';
     }
 }
 ?>

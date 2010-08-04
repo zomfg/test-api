@@ -11,8 +11,12 @@
  */
 class Aum_Page_Chat extends Aum_Page_Abstract{
     public function __construct() {
-        
+        $this->configPageKey = 'chat';
     }
 
+    public function toArray() {
+        $data = array();
+        return $data;
+    }
 }
 ?>

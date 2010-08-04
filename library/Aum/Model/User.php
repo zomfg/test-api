@@ -4,7 +4,7 @@
  *
  * @author johndoe
  */
-class Aum_Model_User {
+class Aum_Model_User implements Aum_Model_Interface {
     /**
      * @var string
      */
@@ -41,9 +41,9 @@ class Aum_Model_User {
      * @param string $email
      * @param string $passHash MD5 password hash
      */
-    function __construct($email = null, $passHash = null) {
+    function __construct($email = null, $password = null) {
         $this->email = $email;
-        $this->passHash = $passHash;
+        $this->password = $password;
     }
 
     public function getEmail() {
@@ -104,6 +104,11 @@ class Aum_Model_User {
 
     public function __toString() {
         return $this->email;
+    }
+
+    public function toArray() {
+        $data = array();
+        return $data;
     }
 }
 ?>

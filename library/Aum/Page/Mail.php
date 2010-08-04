@@ -10,14 +10,13 @@
  * @author dirk
  */
 class Aum_Page_Mail extends Aum_Page_Abstract{
-
     /**
      * @var array
      */
     private $visitorThreads = array();
 
     public function __construct() {
-        
+        $this->configPageKey = 'mail';
     }
 
     /**
@@ -38,6 +37,9 @@ class Aum_Page_Mail extends Aum_Page_Abstract{
                                                 ));
     }
 
-
+    public function toArray() {
+        $data = array();
+        return $data;
+    }
 }
 ?>

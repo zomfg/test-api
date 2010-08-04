@@ -9,8 +9,8 @@
  *
  * @author dirk
  */
-abstract class Aum_Page_Abstract implements Aum_Page_Interface{
-
+abstract class Aum_Page_Abstract implements Aum_Page_Interface {
+    protected $configPageKey = null;
     /**
      * @var string
      */
@@ -41,7 +41,7 @@ abstract class Aum_Page_Abstract implements Aum_Page_Interface{
      * @return string
      */
     public function getURL() {
-        return AumConfig::Config()->getUrl($this);
+        return Aum_Config::get()->aum->link->page->{$this->configPageKey};
     }
 }
 ?>
