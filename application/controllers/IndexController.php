@@ -11,10 +11,21 @@ class IndexController extends Zend_Controller_Action {
 		//test_visits();
 		//test_charms();
 		//test_mails();
-                test_xml();
+                //test_xml();
+                test_threads();
     }
 }
 
+function test_threads(){
+    $fact = new Aum_Factory_Thread();
+    $page = $fact->createPage();
+    $parser = $fact->createParser();
+    $page->setHtmlBody(file_get_contents(APPLICATION_PATH.'/../test_thread.html'));
+
+    $page->parse($parser);
+
+
+}
 
 function test_xml(){
     $fact = new Aum_Factory_NewCharm();

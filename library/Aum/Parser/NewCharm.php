@@ -21,10 +21,13 @@ class Aum_Parser_NewCharm extends Aum_Parser_Abstract{
         foreach($guys->albuminfo as $guy){
             $thumb = $guy->artLocation;
             $name = $guy->artist;
-            $cityAge = $guy->albumName;
+            $cityAge = preg_split('[,]', $guy->albumName);
+            $city = $cityAge[0];
+            $age = $cityAge[1];
             $id = $guy->id;
 
-            echo $thumb. ' '. $name . ' ' . $cityAge . ' '. $id . '<br>';
+            //echo $cityAge .  '<br>';
+            $aumPage->addGuy(new Aum_Model_MiniProfile($name, $age, $city, $thumb, $id, false));
         }
     
     }
