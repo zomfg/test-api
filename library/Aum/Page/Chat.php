@@ -10,7 +10,7 @@
  * @author dirk
  */
 class Aum_Page_Chat extends Aum_Page_Abstract{
-    function __construct() {
+    public function __construct() {
         
     }
 

@@ -20,12 +20,10 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract{
      */
     private $about = '';
     /**
-     *
      * @var string
      */
     private $name = '';
     /**
-     *
      * @var string
      */
     private $quote = '';
@@ -78,33 +76,27 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract{
      */
     private $hobbies = '';
     /**
-     *
      * @var array
      */
     private $movies = array();
     /**
-     *
      * @var array
      */
     private $music = array();
     /**
-     *
      * @var array
      */
     private $books = array();
     /**
-     *
      * @var array
      */
     private $tvShows = array();
 
     /**
-     *
      * @var string
      */
     private $mainPhotoThumb = '';
     /**
-     *
      * @var array
      */
     private $secondaryPhotoThumbs = array();
@@ -169,19 +161,19 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract{
         return $this->hobbies;
     }
 
-    public function &getMovies() {
+    public function getMovies() {
         return $this->movies;
     }
 
-    public function &getMusic() {
+    public function getMusic() {
         return $this->music;
     }
 
-    public function &getBooks() {
+    public function getBooks() {
         return $this->books;
     }
 
-    public function &getTvShows() {
+    public function getTvShows() {
         return $this->tvShows;
     }
 
@@ -193,7 +185,7 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract{
         return $this->mainPhotoThumb;
     }
 
-    public function &getSecondaryPhotoThumbs() {
+    public function getSecondaryPhotoThumbs() {
         return $this->secondaryPhotoThumbs;
     }
 
@@ -292,42 +284,43 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract{
 
 
     /**
-     *
      * @param string $movie
      */
     public function addMovie($movie){
-        array_push($this->getMovies(), $movie);
+        array_push($this->movies, $movie);
     }
     /**
-     *
      * @param string $song
      */
     public function addSong($song){
-        array_push($this->getMusic(), $song);
+        array_push($this->music, $song);
     }
     /**
      *
      * @param string $book
      */
     public function addBook($book){
-        array_push($this->getBooks(), $book);
+        array_push($this->books, $book);
     }
     /**
      *
      * @param string $show
      */
     public function addTvShow($show){
-        array_push($this->getTvShows(), $show);
+        array_push($this->tvShows, $show);
     }
 
+    /**
+     * @param string $mainPhotoThumb
+     */
     public function setMainPhotoThumb($mainPhotoThumb) {
         $this->mainPhotoThumb = $mainPhotoThumb;
     }
-
+    /**
+     * @param string $secondaryPhotoThumb
+     */
     public function addSecondaryPhotoThumb($secondaryPhotoThumb) {
-        array_push($this->getSecondaryPhotoThumbs(), $secondaryPhotoThumb);
+        array_push($this->secondaryPhotoThumbs, $secondaryPhotoThumb);
     }
-
-
 }
 ?>

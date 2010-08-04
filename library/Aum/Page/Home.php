@@ -31,15 +31,15 @@ class Aum_Page_Home extends Aum_Page_Abstract{
      */
     private $popularity = 0;
     /**
-     * @var AumProfile
+     * @var Aum_Page_Profile_Abstract
      */
     private $lastVisitProfile;
     /**
-     * @var AumProfile
+     * @var Aum_Page_Profile_Abstract
      */
     private $lastBasketProfile;
     /**
-     * @var AumProfile
+     * @var Aum_Page_Profile_Abstract
      */
     private $lastMailProfile;
     public function __construct() {
@@ -82,21 +82,21 @@ class Aum_Page_Home extends Aum_Page_Abstract{
     }
 
     /**
-     * @return AumProfile
+     * @return Aum_Page_Profile_Abstract
      */
     public function getLastVisitProfile() {
         return $this->lastVisitProfile;
     }
 
     /**
-     * @return AumProfile
+     * @return Aum_Page_Profile_Abstract
      */
     public function getLastBasketProfile() {
         return $this->lastBasketProfile;
     }
 
     /**
-     * @return AumProfile
+     * @return Aum_Page_Profile_Abstract
      */
     public function getLastMailProfile() {
         return $this->lastMailProfile;
@@ -139,23 +139,23 @@ class Aum_Page_Home extends Aum_Page_Abstract{
     }
 
     /**
-     * @param AumProfile  $lastVisitProfile
+     * @param Aum_Page_Profile_Abstract  $lastVisitProfile
      */
-    public function setLastVisitProfile(AumProfile $lastVisitProfile) {
+    public function setLastVisitProfile(Aum_Page_Profile_Abstract $lastVisitProfile) {
         $this->lastVisitProfile = $lastVisitProfile;
     }
 
     /**
-     * @param AumProfile $lastBasketProfile
+     * @param Aum_Page_Profile_Abstract $lastBasketProfile
      */
-    public function setLastBasketProfile(AumProfile $lastBasketProfile) {
+    public function setLastBasketProfile(Aum_Page_Profile_Abstract $lastBasketProfile) {
         $this->lastBasketProfile = $lastBasketProfile;
     }
 
     /**
-     * @param AumProfile $lastCharmprofile
+     * @param Aum_Page_Profile_Abstract $lastCharmprofile
      */
-    public function setLastMailProfile(AumProfile $lastMailProfile) {
+    public function setLastMailProfile(Aum_Page_Profile_Abstract $lastMailProfile) {
         $this->lastMailProfile = $lastMailProfile;
     }
 

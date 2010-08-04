@@ -13,7 +13,7 @@ class Aum_Page_Basket_Boy extends Aum_Page_Abstract{
 
     private $girls = array();
 
-    function __construct() {
+    public function __construct() {
 
     }
 

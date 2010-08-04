@@ -31,7 +31,7 @@ abstract class Aum_Page_Abstract implements Aum_Page_Interface{
 
 
     /**
-     * @param IAumParser $parser
+     * @param Aum_Parser_Interface $parser
      */
     public function parse(Aum_Parser_Interface $parser) {
         $parser->parse($this);

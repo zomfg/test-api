@@ -24,7 +24,7 @@ class Aum_Page_Mail extends Aum_Page_Abstract{
      * @return array
      */
     public function getThreads() {
-        return $this->$visitorThreads;
+        return $this->visitorThreads;
     }
 
     /**
