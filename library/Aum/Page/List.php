@@ -11,18 +11,24 @@
  */
 class Aum_Page_List extends Aum_Page_Abstract{
 
+    /**
+     * @var array
+     */
     private $visitors = array();
 
-    function __construct() {
+    public function __construct() {
         
     }
 
-    public function &getVisitors(){
+    public function getVisitors(){
         return $this->visitors;
     }
-    
+
+    /**
+     * @param Aum_Model_MiniProfile $visitor
+     */
     public function addVisitor(Aum_Model_MiniProfile $visitor){
-        array_push($this->getVisitors(), $visitor);
+        array_push($this->visitors, $visitor);
     }
     
 }

@@ -11,10 +11,13 @@
  */
 class Aum_Page_NewCharm  extends Aum_Page_Abstract{
     
-    function __construct() {
+    public function __construct() {
 
     }
 
+    /**
+     * @param string $htmlBody
+     */
     public function setHtmlBody($htmlBody){
         parent::setHtmlBody('<?xml version="1.0" encoding="iso-8859-15"?>' . html_entity_decode($htmlBody));
     }

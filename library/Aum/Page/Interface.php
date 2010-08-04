@@ -10,7 +10,7 @@ interface Aum_Page_Interface {
     public function getURL();
 
     /**
-     * @param IAumParser
+     * @param Aum_Parser_Interface
      */
     public function parse(Aum_Parser_Interface $parser);
 
