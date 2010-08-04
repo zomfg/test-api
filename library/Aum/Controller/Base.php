@@ -11,7 +11,7 @@ class Aum_Controller_Base extends Zend_Controller_Action {
     protected $aumClient = null;
 
     /**
-     * @var Zend_Config_Ini
+     * @var Zend_Config
      */
     protected $config = null;
 
@@ -29,7 +29,7 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         $this->config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/api.ini', APPLICATION_ENV);
         $this->authenticate();
         if ($this->isAuthenticated())
-            $this->aumClient = new Aum_Client_Http();
+            $this->aumClient = new Aum_Client_Http($this->config);
         else
             $this->httpError(401);
         return parent::init();
