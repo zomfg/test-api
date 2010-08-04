@@ -17,12 +17,14 @@ class IndexController extends Zend_Controller_Action {
 
 
 function test_xml(){
-    
-    $xml =file_get_contents('/Users/dirk/Documents/AUM/API/test-api/basket.xml');
+    $fact = new Aum_Factory_NewCharm();
+    $page = $fact->createPage();
+    $parser = $fact->createParser();
+    $page->setHtmlBody(file_get_contents('/Users/dirk/Documents/AUM/API/test-api/basket.xml'));
 
-    $xml = html_entity_decode($xml);
-    file_put_contents($filename, $data)
-    $produits = simplexml_load_file('/Users/dirk/Documents/AUM/API/test-api/basket.xml');
+    $page->parse($parser);
+
+    
 }
 
 
