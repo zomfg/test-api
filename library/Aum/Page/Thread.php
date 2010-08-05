@@ -9,11 +9,18 @@
  *
  * @author dirk
  */
-class Aum_Page_Thread extends Aum_Page_Abstract{
+class Aum_Page_Thread extends Aum_Page_Abstract {
+    /**
+     * @var integer
+     */
     private $contact = 0;
+    /**
+     * @var array
+     */
     private $messages = array();
 
-    function __construct() {
+    function __construct($aumId) {
+        $this->setContact($aumId);
         $this->configPageKey = 'thread';
     }
     
@@ -31,6 +38,11 @@ class Aum_Page_Thread extends Aum_Page_Abstract{
 
     public function getMessages(){
         return $this->messages;
+    }
+
+    public function  getURL() {
+        $url = parent::getURL();
+        return (sprintf($url, $this->contact));
     }
 
     public function toArray() {

@@ -10,15 +10,20 @@
  * @author dirk
  */
 class Aum_Factory_Profile_Boy {
-    function __construct() {
+    /**
+     * @var integer
+     */
+    private $aumId = 0;
 
+    public function __construct($aumId) {
+        $this->aumId = $aumId;
     }
 
     /**
      * @return Aum_Page_Profile_Boy
      */
     public function createPage(){
-        return new Aum_Page_Profile_Boy();
+        return new Aum_Page_Profile_Boy($this->aumId);
     }
 
     /**

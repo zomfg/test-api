@@ -78,8 +78,9 @@ class Aum_Page_Profile_Girl extends Aum_Page_Profile_Abstract {
     private $qualifiers = '';
 
     
-    public function __construct() {
+    public function __construct($aumId) {
         $this->configPageKey = 'profile';
+        $this->setAumId($aumId);
     }
 
     /**

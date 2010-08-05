@@ -13,6 +13,11 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract {
     /**
      * @var integer
      */
+    private $aumId = 0;
+
+    /**
+     * @var integer
+     */
     private $visitsCounter = 0;
     /**
      * @var string
@@ -188,6 +193,9 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract {
         return $this->secondaryPhotoThumbs;
     }
 
+    public function getAumId() {
+        return $this->aumId;
+    }
 
 
 
@@ -200,6 +208,9 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract {
 
 
 
+    public function setAumId($aumId) {
+        $this->aumId = $aumId;
+    }
 
     public function setVisitsCounter($visitsCounter) {
         $this->visitsCounter = $visitsCounter;
@@ -320,6 +331,11 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract {
      */
     public function addSecondaryPhotoThumb($secondaryPhotoThumb) {
         array_push($this->secondaryPhotoThumbs, $secondaryPhotoThumb);
+    }
+
+    public function  getURL() {
+        $url = parent::getURL();
+        return sprintf($url, $this->aumId);
     }
 
     protected function  getPageUrlKey() {

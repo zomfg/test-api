@@ -170,6 +170,8 @@ class Aum_Client_Http extends Aum_Client_Abstract {
     }
 
     /**
+     * @param integer $destinationAumId
+     * @param string $message
      * @return boolean
      */
     public function sendMessage($destinationAumId, $message) {
@@ -182,6 +184,38 @@ class Aum_Client_Http extends Aum_Client_Abstract {
         $response = $this->sendRequest($uri, Zend_Http_Client::POST);
         return $response->isSuccessful();
     }
+
+    /**
+     * @param array $threads
+     * @return boolean
+     */
+    public function deleteThreads(array $threads) {
+        $this->httpClient->resetParameters();
+        $uri = $this->config->aum->link->action->{__FUNCTION__};
+        foreach ($threads as $thread)
+            $this->httpClient->setParameterPost($this->config->aum->paramKey->deleteThreads->id, $thread);
+        $this->httpClient->setParameterPost($this->config->aum->paramKey->deleteThreads->submit,
+                $this->config->aum->paramKey->deleteThreads->submitValue);
+        $response = $this->sendRequest($this->config->aum->link->action->{__FUNCTION__}, Zend_Http_Client::POST);
+        return $response->isSuccessful();
+    }
+
+    public function blockMember($aumId) {
+        $this->httpClient->resetParameters();
+        $uri = $this->config->aum->link->action->{__FUNCTION__};
+        $uri = sprintf($uri, $aumId);
+        $response = $this->sendRequest($uri, Zend_Http_Client::GET);
+        return $response->isSuccessful();
+    }
+
+    public function getOutFromBasket($aumId) {
+        $this->httpClient->resetParameters();
+        $uri = $this->config->aum->link->action->{__FUNCTION__};
+        $uri = sprintf($uri, $aumId);
+        $response = $this->sendRequest($uri, Zend_Http_Client::GET);
+        return $response->isSuccessful();
+    }
+
     /**
      * AND ACTIONS
      */

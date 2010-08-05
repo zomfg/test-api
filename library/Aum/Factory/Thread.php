@@ -10,12 +10,13 @@
  * @author dirk
  */
 class Aum_Factory_Thread extends Aum_Factory_Abstract{
-    function __construct() {
-
+    private $aumId = 0;
+    public function __construct($aumId) {
+        $this->aumId = $aumId;
     }
 
     public function createPage() {
-        return new Aum_Page_Thread();
+        return new Aum_Page_Thread($this->aumId);
     }
 
     public function createParser() {

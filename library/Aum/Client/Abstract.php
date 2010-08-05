@@ -17,6 +17,7 @@ abstract class Aum_Client_Abstract {
         $this->config = $config;
     }
 
+    abstract public function getPage($url);
     /**
      * @param Aum_Model_User $user
      */
@@ -25,6 +26,9 @@ abstract class Aum_Client_Abstract {
     abstract public function acceptCharm($aumId);
     abstract public function refuseCharm($aumId);
     abstract public function alertBoulayz($aumId);
+    abstract public function getOutFromBasket($aumId);
+    abstract public function blockMember($aumId);
+    abstract public function deleteThreads(array $threads);
     abstract public function sendMessage($destinationAumId, $message);
     abstract public function kickFromBasket($aumId);
     abstract public function addToBasket($aumId);

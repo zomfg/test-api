@@ -111,5 +111,18 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         $this->_helper->viewRenderer->setNoRender();
         $this->getResponse()->setHttpResponseCode($this->httpErrorCode);
     }
+
+    protected function getPage(Aum_Factory_Abstract $factory) {
+        $page = $factory->createPage();
+        try {
+            $page->setHtmlBody($this->aumClient->getPage($page->getURL()));
+            $page->parse($factory->createParser());
+            $this->view->response = $page->toArray();
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+            $this->httpError(500);
+        }
+    }
 }
 ?>

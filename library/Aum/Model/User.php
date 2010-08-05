@@ -5,6 +5,10 @@
  * @author johndoe
  */
 class Aum_Model_User implements Aum_Model_Interface {
+    const SEX_MALE = 1;
+    const SEX_FEMALE = 2;
+    const SEX_UNKNOWN = 3;
+
     /**
      * @var integer
      */
@@ -118,12 +122,30 @@ class Aum_Model_User implements Aum_Model_Interface {
         return ($this->id > 0);
     }
 
+    public static function getSex($aumId) {
+        if (preg_match('/2[0-9]+/', $aumId))
+            return self::SEX_MALE;
+        if (preg_match('/1[0-9]+/', $aumId))
+            return self::SEX_FEMALE;
+        return self::SEX_UNKNOWN;
+    }
+
+    public function canInteractWith($aumId) {
+        if (($targetSex = self::getSex($aumId)) == self::SEX_UNKNOWN)
+            return false;
+        if (($sourceSex = self::getSex($this->id)) == self::SEX_UNKNOWN)
+            return false;
+        return ($targetSex != $sourceSex);
+    }
+
     public function __toString() {
         return $this->email;
     }
 
     public function toArray() {
         $data = array();
+        $data['aumId'] = $this->getId();
+        $data['email'] = $this->getEmail();
         return $data;
     }
 }

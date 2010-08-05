@@ -1,24 +1,21 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Aum_Factory_List
  *
  * @author dirk
  */
-class Aum_Factory_List extends Aum_Factory_Abstract{
-    function __construct() {
-        
+class Aum_Factory_List extends Aum_Factory_Abstract {
+    private $configPageKey = null;
+
+    public function __construct($configPageKey = 'visit') {
+        $this->configPageKey = $configPageKey;
     }
 
     /**
      * @return Aum_Page_List
      */
     public function createPage(){
-        return new Aum_Page_List();
+        return new Aum_Page_List($this->configPageKey);
     }
 
     /**

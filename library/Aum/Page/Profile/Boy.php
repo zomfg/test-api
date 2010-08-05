@@ -24,8 +24,9 @@ class Aum_Page_Profile_Boy extends Aum_Page_Profile_Abstract{
     private $locomotion = '';
     private $stars = array();
     
-    public function __construct(){
+    public function __construct($aumId){
         $this->configPageKey = 'profile';
+        $this->setAumId($aumId);
     }
 
     public function getPopularity() {
