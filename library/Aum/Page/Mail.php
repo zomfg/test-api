@@ -27,19 +27,14 @@ class Aum_Page_Mail extends Aum_Page_Abstract{
     }
 
     /**
-     * @param array $threads
+     * @param Aum_Model_Mail $mail
      */
-    public function addThread($visitor, $thread, $subject, $time) {
-        array_push($this->visitorThreads, array('contact' => $visitor,
-                                                'thread_url' => $thread,
-                                                'subject' => $subject,
-                                                'time' => $time
-                                                ));
+    public function addThread(Aum_Model_Mail $mail) {
+        array_push($this->visitorThreads, $mail);
     }
 
     public function toArray() {
-        $data = array();
-        return $data;
+        return parent::filterArray(get_object_vars($this));
     }
 }
 ?>

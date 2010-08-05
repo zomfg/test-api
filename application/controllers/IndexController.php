@@ -7,7 +7,9 @@ class IndexController extends Aum_Controller_Base {
     }
 
     public function indexAction() {
-        $this->getPage(new Aum_Factory_Home());
+        $response = $this->getPage(new Aum_Factory_Home());
+        $response->setExtra($this->aumUser);
+        $this->setApiResponse($response);
     }
 }
 ?>

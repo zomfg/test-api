@@ -9,7 +9,12 @@
  *
  * @author dirk
  */
-class Aum_Model_MiniProfile implements Aum_Model_Interface {
+class Aum_Model_MiniProfile extends Aum_Abstract {
+    /**
+     * @var integer
+     */
+    private $aumId = 0;
+
     /**
      * @var string
      */
@@ -34,19 +39,17 @@ class Aum_Model_MiniProfile implements Aum_Model_Interface {
      * @var integer
      */
     private $age = 0;
+
     /**
-     * @var string
-     */
-    private $url = '';
-    /**
-     *
+     * @param integer $aumId
      * @param string $name
      * @param integer $age
      * @param string $city
      * @param string $pictureUrl
      * @param boolean $online
      */
-    public function __construct($name, $age, $city, $pictureUrl, $url, $online) {
+    public function __construct($aumId, $name, $age, $city, $pictureUrl, $online) {
+        $this->setAumId($aumId);
         $this->setAge($age);
         $this->setName($name);
         $this->setCity($city);
@@ -54,7 +57,6 @@ class Aum_Model_MiniProfile implements Aum_Model_Interface {
         $this->setOnline($online);
     }
 
-    
     /**
      * @return string
      */
@@ -125,9 +127,16 @@ class Aum_Model_MiniProfile implements Aum_Model_Interface {
         $this->age = $age;
     }
 
+    public function getAumId() {
+        return $this->aumId;
+    }
+
+    public function setAumId($aumId) {
+        $this->aumId = $aumId;
+    }
+
     public function toArray() {
-        $data = array();
-        return $data;
+        return parent::filterArray(get_object_vars($this));
     }
 }
 ?>

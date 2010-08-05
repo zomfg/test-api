@@ -1,5 +1,6 @@
 <?php
-/* 
+
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -9,27 +10,31 @@
  *
  * @author dirk
  */
-class Aum_Parser_NewCharm extends Aum_Parser_Abstract{
-    public function __construct(){
+class Aum_Parser_NewCharm extends Aum_Parser_Abstract {
+
+    public function __construct() {
         
     }
 
-    public function  parse(Aum_Page_Interface $aumPage){
-
+    public function parse(Aum_Page_Interface $aumPage) {
         $guys = simplexml_load_string($aumPage->getHtmlBody());
 
-        foreach($guys->albuminfo as $guy){
-            $thumb = $guy->artLocation;
-            $name = $guy->artist;
-            $cityAge = preg_split('[,]', $guy->albumName);
-            $city = $cityAge[0];
-            $age = $cityAge[1];
-            $id = $guy->id;
+        foreach ($guys->albuminfo as $guy) {
+            $thumb = $this->sanitize($guy->artLocation);
+            $name = $this->sanitize($guy->artist);
+            $online = false;
+            if (strstr($name, ' (online)')) {
+                $online = true;
+                $name = str_replace(' (online)', '', $name);
+            }
+            $cityAge = explode(',', $guy->albumName);
+            $city = $this->sanitize($cityAge[0]);
+            $age = $this->sanitize($cityAge[1]);
+            $id = $this->sanitize($guy->id);
 
             //echo $cityAge .  '<br>';
-            $aumPage->addGuy(new Aum_Model_MiniProfile($name, $age, $city, $thumb, $id, false));
+            $aumPage->addGuy(new Aum_Model_MiniProfile($id, $name, $age, $city, $thumb, $online));
         }
-    
     }
 }
 ?>

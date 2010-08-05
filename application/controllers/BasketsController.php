@@ -13,7 +13,10 @@ class BasketsController extends Aum_Controller_Base
     }
 
     public function listAction() {
-        $this->getPage(new Aum_Factory_List('basket'));
+        if (Aum_Model_User::getSex($this->aumUser->getId()) == Aum_Model_User::SEX_FEMALE)
+            $this->setApiResponse($this->getPage(new Aum_Factory_Basket_Boy()));
+        else
+            $this->setApiResponse($this->getPage(new Aum_Factory_Basket_Girl()));
     }
 
     public function addAction() {

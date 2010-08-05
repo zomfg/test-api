@@ -4,7 +4,7 @@
  *
  * @author johndoe
  */
-class Aum_Model_User implements Aum_Model_Interface {
+class Aum_Model_User extends Aum_Abstract {
     const SEX_MALE = 1;
     const SEX_FEMALE = 2;
     const SEX_UNKNOWN = 3;
@@ -17,11 +17,6 @@ class Aum_Model_User implements Aum_Model_Interface {
      * @var string
      */
     private $email      = null;
-
-    /**
-     * @var string
-     */
-    private $passHash   = null;
 
     /**
      * @var string
@@ -47,7 +42,7 @@ class Aum_Model_User implements Aum_Model_Interface {
 
     /**
      * @param string $email
-     * @param string $passHash MD5 password hash
+     * @param string $password
      */
     function __construct($email = null, $password = null) {
         $this->email = $email;
@@ -68,14 +63,6 @@ class Aum_Model_User implements Aum_Model_Interface {
 
     public function setPassword($password) {
         $this->password = $password;
-    }
-
-    public function getPassHash() {
-        return $this->passHash;
-    }
-
-    public function setPassHash($passHash) {
-        $this->passHash = $passHash;
     }
 
     public function getNumberVisits() {
@@ -143,10 +130,7 @@ class Aum_Model_User implements Aum_Model_Interface {
     }
 
     public function toArray() {
-        $data = array();
-        $data['aumId'] = $this->getId();
-        $data['email'] = $this->getEmail();
-        return $data;
+        return parent::filterArray(get_object_vars($this), array('password'));
     }
 }
 ?>

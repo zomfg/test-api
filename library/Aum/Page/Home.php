@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-class Aum_Page_Home extends Aum_Page_Abstract{
+class Aum_Page_Home extends Aum_Page_Abstract {
     /**
      * @var integer
      */
@@ -164,12 +164,7 @@ class Aum_Page_Home extends Aum_Page_Abstract{
      * @return array
      */
     public function toArray() {
-        $data = array();
-        $data['popularity'] = $this->getPopularity();
-        $data['counter']['visit'] = $this->getNewVisitsCounter();
-        $data['counter']['mail'] = $this->getNewMailsCounter();
-        $data['counter']['basket'] = $this->getNewBasketsCounter();
-        return $data;
+        return parent::filterArray(get_object_vars($this));
     }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -11,7 +11,7 @@
  */
 class Aum_Parser_Profile_Girl extends Aum_Parser_Profile_Abstract{
     public function __construct() {
-        
+
     }
 
     /**
@@ -26,11 +26,11 @@ class Aum_Parser_Profile_Girl extends Aum_Parser_Profile_Abstract{
     */
     protected function parseAbout(Aum_Page_Profile_Abstract $aumPage){
         $tmp = $this->dom->find('td[width=225] table td');
-        $aumPage->setName($tmp[0]->plaintext);
-        $aumPage->setQuote($tmp[2]->plaintext);
+        $aumPage->setName($this->sanitize($tmp[0]->plaintext));
+        $aumPage->setQuote($this->sanitize($tmp[2]->plaintext));
 
         $aboutText = $this->dom->find('div[id=about_div]');
-        $aumPage->setAbout(trim($aboutText[0]->plaintext));
+        $aumPage->setAbout($this->sanitize($aboutText[0]->plaintext));
 
         $all = $this->dom->find('table[width=451]');
 
@@ -61,7 +61,7 @@ class Aum_Parser_Profile_Girl extends Aum_Parser_Profile_Abstract{
         $details = $details->find('text');
 
         for($i = 0 ; $i < count($details) ; ++$i){
-            $details[$i]->plaintext = utf8_encode($details[$i]->plaintext);
+            $details[$i]->plaintext = $this->sanitize($details[$i]->plaintext);
 
             if(stristr($details[$i]->plaintext, 'age')){
                 $aumPage->setAge($details[++$i]);
@@ -123,13 +123,6 @@ class Aum_Parser_Profile_Girl extends Aum_Parser_Profile_Abstract{
              trois
 
 
-
-
-
-
-
-
-
           Livres
           Télé
 
@@ -144,39 +137,35 @@ class Aum_Parser_Profile_Girl extends Aum_Parser_Profile_Abstract{
         $cinema = array();
         $books = array();
         $tv = array();
-        
+
         for($i = 0 ; $i < count($likes) ; ++$i){
-            $likes[$i]->plaintext = utf8_encode($likes[$i]->plaintext);
-            
+            $likes[$i]->plaintext = $this->sanitize($likes[$i]->plaintext);
+
             if(stristr($likes[$i]->plaintext, 'hobbies')){
-                $aumPage->setHobbies($likes[++$i]);
+                $aumPage->setHobbies($this->sanitize($likes[++$i]));
             }
 
-            
             else if(stristr($likes[$i]->plaintext, 'musique')){
                 // parse music and cinema
                 // start after 'Cinéma'
                 for($j = 3 ; !stristr($likes[$i + $j]->plaintext, 'Livres') && $j + $i < count($likes) ; ++$j){
                     if($j % 2 == 1)
-                        $aumPage->addSong ($likes[$i + $j]->plaintext);
+                        $aumPage->addSong ($this->sanitize($likes[$i + $j]->plaintext));
                     else
-                        $aumPage->addMovie($likes[$i + $j]->plaintext);
+                        $aumPage->addMovie($this->sanitize($likes[$i + $j]->plaintext));
                 }
-
-
             }
             else if(stristr($likes[$i]->plaintext, 'télé')){
                 // parse books and tv
                 // start after 'Télé'
                 for($j = 2 ; $j + $i < count($likes) ; ++$j){
                     if($j % 2 == 0)
-                        $aumPage->addBook($likes[$i + $j]->plaintext);
+                        $aumPage->addBook($this->sanitize($likes[$i + $j]->plaintext));
                     else
-                        $aumPage->addTvShow($likes[$i + $j]->plaintext);
+                        $aumPage->addTvShow($this->sanitize($likes[$i + $j]->plaintext));
                 }
             }
         }
-
     }
 
     /**
@@ -185,9 +174,9 @@ class Aum_Parser_Profile_Girl extends Aum_Parser_Profile_Abstract{
      */
     protected function parseSexo(simple_html_dom_node $sexo, Aum_Page_Profile_Abstract $aumPage){
         $sexo = $sexo->find('text');
-        
+
         for($i = 0 ; $i < count($sexo) ; ++$i){
-            $sexo[$i]->plaintext = utf8_encode($sexo[$i]->plaintext);
+            $sexo[$i]->plaintext = $this->sanitize($sexo[$i]->plaintext);
 
             if(stristr($sexo[$i]->plaintext, 'ce qui se cache en dessous')){
                 $aumPage->setUnder($sexo[++$i]);
@@ -214,7 +203,7 @@ class Aum_Parser_Profile_Girl extends Aum_Parser_Profile_Abstract{
         $chars = $chars->find('text');
 
         for($i = 0 ; $i < count($chars) ; ++$i){
-            $chars[$i]->plaintext = utf8_encode($chars[$i]->plaintext);
+            $chars[$i]->plaintext = $this->sanitize($chars[$i]->plaintext);
 
             if(stristr($chars[$i]->plaintext, 'craquer')){
                 $aumPage->setCrispy($chars[++$i]);

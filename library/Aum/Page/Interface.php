@@ -3,7 +3,7 @@
  *
  * @author johndoe
  */
-interface Aum_Page_Interface {
+interface Aum_Page_Interface extends Aum_Interface {
     /**
      * @return string
      */
@@ -23,10 +23,5 @@ interface Aum_Page_Interface {
      * @return string
      */
     public function getHtmlBody();
-
-    /**
-     * @return array
-     */
-    public function toArray();
 }
 ?>

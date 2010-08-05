@@ -13,97 +13,97 @@ abstract class Aum_Page_Profile_Abstract extends Aum_Page_Abstract {
     /**
      * @var integer
      */
-    private $aumId = 0;
+    protected $aumId = 0;
 
     /**
      * @var integer
      */
-    private $visitsCounter = 0;
+    protected $visitsCounter = 0;
     /**
      * @var string
      */
-    private $about = '';
+    protected $about = '';
     /**
      * @var string
      */
-    private $name = '';
+    protected $name = '';
     /**
      * @var string
      */
-    private $quote = '';
+    protected $quote = '';
     /**
      * @var string
      */
-    private $age = '';
+    protected $age = '';
     /**
      * @var string
      */
-    private $location = '';
+    protected $location = '';
     /**
      * @var string
      */
-    private $eyes = '';
+    protected $eyes = '';
     /**
      * @var string
      */
-    private $hair = '';
+    protected $hair = '';
     /**
      * @var string
      */
-    private $measurements = '';
+    protected $measurements = '';
     /**
      * @var string
      */
-    private $style = '';
+    protected $style = '';
     /**
      * @var string
      */
-    private $origins = '';
+    protected $origins = '';
     /**
      * @var string
      */
-    private $job = '';
+    protected $job = '';
     /**
      * @var string
      */
-    private $food = '';
+    protected $food = '';
     /**
      * @var string
      */
-    private $alcohol = '';
+    protected $alcohol = '';
     /**
      * @var string
      */
-    private $smoke = '';
+    protected $smoke = '';
      /**
      * @var string
      */
-    private $hobbies = '';
+    protected $hobbies = '';
     /**
      * @var array
      */
-    private $movies = array();
+    protected $movies = array();
     /**
      * @var array
      */
-    private $music = array();
+    protected $music = array();
     /**
      * @var array
      */
-    private $books = array();
+    protected $books = array();
     /**
      * @var array
      */
-    private $tvShows = array();
+    protected $tvShows = array();
 
     /**
      * @var string
      */
-    private $mainPhotoThumb = '';
+    protected $mainPhotoThumb = '';
     /**
      * @var array
      */
-    private $secondaryPhotoThumbs = array();
+    protected $secondaryPhotoThumbs = array();
 
     public function getVisitsCounter() {
         return $this->visitsCounter;

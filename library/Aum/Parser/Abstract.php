@@ -16,7 +16,18 @@ abstract class Aum_Parser_Abstract implements Aum_Parser_Interface {
         $this->dom->load($aumPage->getHtmlBody());
     }
 
-    public function sanitize($string) {
+    public function sanitize($string, $utf8 = -1) {
+        if ($utf8 < 0)
+            $utf8 = Aum_Config::get()->aum->parser->sanitize->utf8;
+        if ($utf8 == 1)
+            $string = utf8_decode($string);
+        else if ($utf8 == 2)
+            $string = utf8_encode($string);
+        $string = strip_tags($string);
+        $string = trim($string);
+        $string = preg_replace('/ +/', ' ', $string);
+        $string = str_replace(array('&#39;', '&nbsp;', "?", "?"), array("'", " ", "'", '-'), $string);
+        $string = html_entity_decode($string);
         return (trim($string));
     }
 }

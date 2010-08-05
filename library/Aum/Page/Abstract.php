@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-abstract class Aum_Page_Abstract implements Aum_Page_Interface {
+abstract class Aum_Page_Abstract extends Aum_Abstract implements Aum_Page_Interface {
     protected $configPageKey = null;
     /**
      * @var string
@@ -42,6 +42,15 @@ abstract class Aum_Page_Abstract implements Aum_Page_Interface {
      */
     public function getURL() {
         return Aum_Config::get()->aum->link->page->{$this->configPageKey};
+    }
+
+    /**
+     * @param array $properties
+     * @param array $filter
+     * @return array
+     */
+    protected function filterArray(array $properties, array $filter = array()) {
+        return parent::filterArray($properties, array_merge(array('configPageKey', 'htmlBody'), $filter));
     }
 }
 ?>

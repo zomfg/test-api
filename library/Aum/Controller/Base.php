@@ -77,7 +77,7 @@ class Aum_Controller_Base extends Zend_Controller_Action {
             $this->getRequest()->getActionKey(),
             $this->getRequest()->getControllerKey(),
             $this->getRequest()->getModuleKey(),
-            $this->config->api->security->authKey
+            $this->config->api->paramKey->auth
         );
         $params = $this->getRequest()->getParams();
         ksort($params);
@@ -112,17 +112,30 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         $this->getResponse()->setHttpResponseCode($this->httpErrorCode);
     }
 
+    /**
+     * @param Aum_Factory_Abstract $factory
+     * @return Aum_Response
+     */
     protected function getPage(Aum_Factory_Abstract $factory) {
+        $response = new Aum_Response($this->config);
         $page = $factory->createPage();
         try {
             $page->setHtmlBody($this->aumClient->getPage($page->getURL()));
             $page->parse($factory->createParser());
-            $this->view->response = $page->toArray();
+            $response->setData($page);
         }
         catch (Exception $e) {
-            echo $e->getMessage();
+            $response->setMessage($e->getMessage());
             $this->httpError(500);
         }
+        return $response;
+    }
+
+    /**
+     * @param Aum_Response $response
+     */
+    protected function setApiResponse(Aum_Response $response) {
+        $this->view->response = $response->toArray();
     }
 }
 ?>

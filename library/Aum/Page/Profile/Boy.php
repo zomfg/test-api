@@ -129,8 +129,7 @@ class Aum_Page_Profile_Boy extends Aum_Page_Profile_Abstract{
     }
 
     public function toArray() {
-        $data = array();
-        return $data;
+        return parent::filterArray(get_object_vars($this));
     }
 }
 ?>

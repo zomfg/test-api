@@ -31,8 +31,7 @@ class Aum_Page_List extends Aum_Page_Abstract {
     }
 
     public function toArray() {
-        $data = array();
-        return $data;
+        return parent::filterArray(get_object_vars($this));
     }
 }
 ?>

@@ -34,7 +34,7 @@ class MessagesController extends Aum_Controller_Base {
     }
 
     public function listAction() {
-        $this->getPage(new Aum_Factory_Mail());
+        $this->setApiResponse($this->getPage(new Aum_Factory_Mail()));
     }
 
     public function threadAction() {
@@ -43,6 +43,6 @@ class MessagesController extends Aum_Controller_Base {
             return $this->httpError(400);
         if (!$this->aumUser->canInteractWith($aumId))
             return $this->httpError(405);
-        $this->getPage(new Aum_Factory_Thread($aumId));
+        $this->setApiResponse($this->getPage(new Aum_Factory_Thread($aumId)));
     }
 }

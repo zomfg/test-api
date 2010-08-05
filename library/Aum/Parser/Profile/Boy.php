@@ -1,9 +1,4 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Aum_Parser_Profile_Boy
  *
@@ -14,7 +9,6 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
         
     }
     /**
-     *
      * @param Aum_Page_Interface $aumPage 
      */
     public function parse(Aum_Page_Interface $aumPage){
@@ -26,11 +20,11 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
     */
     protected function parseAbout(Aum_Page_Profile_Abstract $aumPage){
         $tmp = $this->dom->find('tr[height=142] table td');
-        $aumPage->setName($tmp[0]->plaintext);
-        $aumPage->setQuote($tmp[2]->plaintext);
+        $aumPage->setName($this->sanitize($tmp[0]->plaintext));
+        $aumPage->setQuote($this->sanitize($tmp[2]->plaintext));
         
         $aboutText = $this->dom->find('div[id=about_div]');
-        $aumPage->setAbout(trim($aboutText[0]->plaintext));
+        $aumPage->setAbout($this->sanitize($aboutText[0]->plaintext));
 
         $all = $this->dom->find('table[width=452]');
 
@@ -47,8 +41,8 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
     protected function parseStats(Aum_Page_Profile_Abstract $aumPage){
         $stats = $this->dom->find('td[valign=top] span');
        // set the counters
-       $aumPage->setPopularity($stats[6]->plaintext);
-       $aumPage->setVisitsCounter($stats[7]->plaintext);
+       $aumPage->setPopularity($this->sanitize($stats[6]->plaintext));
+       $aumPage->setVisitsCounter($this->sanitize($stats[7]->plaintext));
 }
 
     /**
@@ -59,50 +53,50 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
         $details = $details->find('text');
 
         for($i = 0 ; $i < count($details) ; ++$i){
-            $details[$i] = utf8_encode($details[$i]);
+            $details[$i] = $this->sanitize($details[$i]);
 
 
             if(stristr($details[$i], 'age')){
-                $aumPage->setAge($details[++$i]);
+                $aumPage->setAge($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'réside à')){
-                $aumPage->setLocation($details[++$i]);
+                $aumPage->setLocation($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'yeux')){
-                $aumPage->setEyes($details[++$i]);
+                $aumPage->setEyes($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'cheveux')){
-                $aumPage->setHair($details[++$i]);
+                $aumPage->setHair($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'mensurations')){
-                $aumPage->setMeasurements($details[++$i]);
+                $aumPage->setMeasurements($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'style')){
-                $aumPage->setStyle($details[++$i]);
+                $aumPage->setStyle($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'origines')){
-                $aumPage->setOrigins($details[++$i]);
+                $aumPage->setOrigins($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'socio')){
-                $aumPage->setSocio($details[++$i]);
+                $aumPage->setSocio($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'pilosité')){
-                $aumPage->setPilosity($details[++$i]);
+                $aumPage->setPilosity($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'relation souhaitée')){
-                $aumPage->setWishedRelation($details[++$i]);
+                $aumPage->setWishedRelation($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'profession')){
-                $aumPage->setJob($details[++$i]);
+                $aumPage->setJob($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'alimentation')){
-                $aumPage->setFood($details[++$i]);
+                $aumPage->setFood($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'alcool')){
-                $aumPage->setAlcohol($details[++$i]);
+                $aumPage->setAlcohol($this->sanitize($details[++$i]));
             }
             else if(stristr($details[$i], 'tabac')){
-                $aumPage->setSmoke(utf8_encode($details[++$i]));
+                $aumPage->setSmoke($this->sanitize($details[++$i]));
             }
         }
     }
@@ -111,32 +105,32 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
         $acc = $acc->find('text');
 
         for($i = 0 ; $i < count($acc) ; ++$i){
-            $acc[$i] = utf8_encode($acc[$i]);
+            $acc[$i] = $this->sanitize($acc[$i]);
 
 
             if(stristr($acc[$i], 'fonctions')){
-                $aumPage->setFunction($acc[++$i]);
+                $aumPage->setFunction($this->sanitize($acc[++$i]));
             }
             else if(stristr($acc[$i], 'habite')){
-                $aumPage->setHousing($acc[++$i]);
+                $aumPage->setHousing($this->sanitize($acc[++$i]));
             }
             else if(stristr($acc[$i], 'lit')){
-                $aumPage->setBed($acc[++$i]);
+                $aumPage->setBed($this->sanitize($acc[++$i]));
             }
             else if(stristr($acc[$i], 'salle de bain')){
-                $aumPage->setBathroom($acc[++$i]);
+                $aumPage->setBathroom($this->sanitize($acc[++$i]));
             }
             else if(stristr($acc[$i], 'audiovisuel')){
-                $aumPage->setHifi($acc[++$i]);
+                $aumPage->setHifi($this->sanitize($acc[++$i]));
             }
             else if(stristr($acc[$i], 'extra')){
-                $aumPage->setExtra($acc[++$i]);
+                $aumPage->setExtra($this->sanitize($acc[++$i]));
             }
             else if(stristr($acc[$i], 'animaux')){
-                $aumPage->setPets($acc[++$i]);
+                $aumPage->setPets($this->sanitize($acc[++$i]));
             }
             else if(stristr($acc[$i], 'locomotion')){
-                $aumPage->setLocomotion($acc[++$i]);
+                $aumPage->setLocomotion($this->sanitize($acc[++$i]));
             }
         }
     }
@@ -156,12 +150,10 @@ class Aum_Parser_Profile_Boy extends Aum_Parser_Profile_Abstract{
 
     private function parseStar($star, $aumPage){
         // new stars (270094, 0, 3.875);
-        
-        $star = preg_split('[,]', $star);
+        $star = explode(',', $star);
         $starId = intval($star[1]);
         $starValue = doubleval($star[2]);
         $aumPage->addStar($starId, $starValue);
-        
     }
 }
 ?>

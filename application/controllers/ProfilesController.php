@@ -19,9 +19,11 @@ class ProfilesController extends Aum_Controller_Base {
         if (!$aumId || !is_numeric($aumId))
             return $this->httpError(400);
         if (Aum_Model_User::getSex($aumId) == Aum_Model_User::SEX_FEMALE)
-            $this->getPage(new Aum_Factory_Profile_Girl($aumId));
+            $response = $this->getPage(new Aum_Factory_Profile_Girl($aumId));
         else
-            $this->getPage(new Aum_Factory_Profile_Boy($aumId));
+            $response = $this->getPage(new Aum_Factory_Profile_Boy($aumId));
+        var_dump($response->toArray());
+        $this->setApiResponse($response);
     }
 
     public function blockAction() {

@@ -1,15 +1,10 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of AumBoyProfileFactory
+ * Description of Aum_Factory_Profile_Boy
  *
  * @author dirk
  */
-class Aum_Factory_Profile_Boy {
+class Aum_Factory_Profile_Boy extends Aum_Factory_Abstract {
     /**
      * @var integer
      */

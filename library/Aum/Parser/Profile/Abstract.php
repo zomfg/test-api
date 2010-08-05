@@ -44,13 +44,6 @@ abstract class Aum_Parser_Profile_Abstract extends Aum_Parser_Abstract{
              trois
 
 
-
-
-
-
-
-
-
           Livres
           Télé
 
@@ -67,37 +60,33 @@ abstract class Aum_Parser_Profile_Abstract extends Aum_Parser_Abstract{
         $tv = array();
 
         for($i = 0 ; $i < count($likes) ; ++$i){
-            $likes[$i]->plaintext = utf8_encode($likes[$i]->plaintext);
+            $likes[$i]->plaintext = $this->sanitize($likes[$i]->plaintext);
 
             if(stristr($likes[$i]->plaintext, 'hobbies')){
-                $aumPage->setHobbies($likes[++$i]);
+                $aumPage->setHobbies($this->sanitize($likes[++$i]));
             }
-
 
             else if(stristr($likes[$i]->plaintext, 'musique')){
                 // parse music and cinema
                 // start after 'Cinéma'
                 for($j = 3 ; !stristr($likes[$i + $j]->plaintext, 'Livres') && $j + $i < count($likes) ; ++$j){
                     if($j % 2 == 1)
-                        $aumPage->addSong ($likes[$i + $j]->plaintext);
+                        $aumPage->addSong ($this->sanitize($likes[$i + $j]->plaintext));
                     else
-                        $aumPage->addMovie($likes[$i + $j]->plaintext);
+                        $aumPage->addMovie($this->sanitize($likes[$i + $j]->plaintext));
                 }
-
-
             }
             else if(stristr($likes[$i]->plaintext, 'télé')){
                 // parse books and tv
                 // start after 'Télé'
                 for($j = 2 ; $j + $i < count($likes) ; ++$j){
                     if($j % 2 == 0)
-                        $aumPage->addBook($likes[$i + $j]->plaintext);
+                        $aumPage->addBook($this->sanitize($likes[$i + $j]->plaintext));
                     else
-                        $aumPage->addTvShow($likes[$i + $j]->plaintext);
+                        $aumPage->addTvShow($this->sanitize($likes[$i + $j]->plaintext));
                 }
             }
         }
-
     }
 
 
@@ -107,11 +96,11 @@ abstract class Aum_Parser_Profile_Abstract extends Aum_Parser_Abstract{
      */
     private function parsePictures(Aum_Page_Profile_Abstract $aumPage){
         $photos = $this->dom->find('td[width=316] table tr td[width=250]');
-        $aumPage->setMainPhotoThumb($photos[0]->background);
+        $aumPage->setMainPhotoThumb($this->sanitize($photos[0]->background));
         
         $photos = $this->dom->find('td[width=316] table tr[height=66] td[width=66]');
         foreach($photos as $photo){
-            $aumPage->addSecondaryPhotoThumb($photo->background);
+            $aumPage->addSecondaryPhotoThumb($this->sanitize($photo->background));
         }
     }
     /**

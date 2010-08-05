@@ -3,7 +3,10 @@
  *
  * @author Sergio
  */
-interface Aum_Model_Interface {
+interface Aum_Interface {
+    /**
+     * @return array
+     */
     public function toArray();
 }
 ?>

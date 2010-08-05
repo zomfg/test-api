@@ -16,7 +16,7 @@ class VisitsController extends Aum_Controller_Base {
     }
 
     public function listAction() {
-        $this->getPage(new Aum_Factory_List('visit'));
+        $this->setApiResponse($this->getPage(new Aum_Factory_List('visit')));
     }
 }
 ?>

@@ -41,11 +41,11 @@ class CharmsController extends Aum_Controller_Base {
     }
 
     public function listAction() {
-        $this->getPage(new Aum_Factory_List('charm'));
+        $this->setApiResponse($this->getPage(new Aum_Factory_List('charm')));
     }
 
     public function listNewAction() {
-        $this->getPage(new Aum_Factory_List('newCharm'));
+        $this->setApiResponse($this->getPage(new Aum_Factory_NewCharm()));
     }
 }
 ?>
