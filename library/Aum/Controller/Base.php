@@ -33,8 +33,14 @@ class Aum_Controller_Base extends Zend_Controller_Action {
     public function init() {
         $this->config = Aum_Config::get();
         $this->authenticate();
-        if ($this->isAuthenticated())
-            $this->aumClient = new Aum_Client_Http($this->config);
+        $this->aumClient = new Aum_Client_Http($this->config);
+        if ($this->isAuthenticated()) {
+            try {
+                if (!$this->aumClient->login($this->aumUser))
+                    $this->httpError(403);
+            }
+            catch (Exception $e) {$this->httpError(500);}
+        }
         else
             $this->httpError(401);
         return parent::init();
@@ -43,9 +49,11 @@ class Aum_Controller_Base extends Zend_Controller_Action {
     protected function initContexts(array $actions = array()) {
         if (count($actions) < 1)
             return ;
+        $contexts = explode(',', $this->config->api->formats);
+        if (!is_array($contexts) || count($contexts) < 1)
+            return ;
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
-        $contextSwitch->addContext('plist', array('suffix' => 'plist', 'headers' => array('Content-Type' => 'application/xml')));
-        $contexts = array('json', 'xml', 'plist');
+        //$contextSwitch->addContext('plist', array('suffix' => 'plist', 'headers' => array('Content-Type' => 'application/xml')));
         $actionContexts = array();
         foreach ($actions as $action)
             $actionContexts[$action] = $contexts;
@@ -59,11 +67,11 @@ class Aum_Controller_Base extends Zend_Controller_Action {
     }
 
     protected function authenticate() {
-        if (!($receivedSignature = $this->getRequest()->getParam($this->config->api->security->authKey)))
+        if (!($receivedSignature = $this->getRequest()->getParam($this->config->api->paramKey->auth)))
             return false;
-        if (!($login = $this->getRequest()->getParam($this->config->api->security->loginKey)))
+        if (!($login = $this->getRequest()->getParam($this->config->api->paramKey->login)))
             return false;
-        if (!($password = $this->getRequest()->getParam($this->config->api->security->passwordKey)))
+        if (!($password = $this->getRequest()->getParam($this->config->api->paramKey->password)))
             return false;
         $skipParams = array(
             $this->getRequest()->getActionKey(),
@@ -77,14 +85,15 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         foreach ($params as $k => $v)
             if (!in_array($k, $skipParams))
                 $data .= '&'.$k.'='.$v;
-        $computedSignature = Zend_Crypt_Hmac::compute($this->config->api->security->privateKey, $this->config->api->security->algorithm, $data);
+        $computedSignature = Zend_Crypt_Hmac::compute(
+                $this->config->api->security->privateKey,
+                $this->config->api->security->algorithm, $data);
         Zend_Debug::dump($data);
         Zend_Debug::dump($receivedSignature);
         Zend_Debug::dump($computedSignature);
         if ($computedSignature == $receivedSignature) {
             $this->aumUser = new Aum_Model_User($login, $password);
-            // TODO peut mieux faire o:
-            $this->authenticated = $this->aumClient->login($this->aumUser);
+            $this->authenticated = true;
         }
         return $this->authenticated;
     }

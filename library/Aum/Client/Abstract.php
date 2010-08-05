@@ -20,7 +20,7 @@ abstract class Aum_Client_Abstract {
     /**
      * @param Aum_Model_User $user
      */
-    abstract public function login(Aum_Model_User $user);
+    abstract public function login(Aum_Model_User &$user);
     abstract public function logout();
     abstract public function acceptCharm($aumId);
     abstract public function refuseCharm($aumId);

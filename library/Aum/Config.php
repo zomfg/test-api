@@ -16,8 +16,10 @@ class Aum_Config {
      */
     public static function get() {
         static $config = null;
-        if ($config == null)
+        if ($config == null) {
             $config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/api.ini', APPLICATION_ENV);
+            $config->setReadOnly();
+        }
         return $config;
     }
 }

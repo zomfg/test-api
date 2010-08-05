@@ -6,6 +6,10 @@
  */
 class Aum_Model_User implements Aum_Model_Interface {
     /**
+     * @var integer
+     */
+    private $id         = 0;
+    /**
      * @var string
      */
     private $email      = null;
@@ -100,6 +104,18 @@ class Aum_Model_User implements Aum_Model_Interface {
 
     public function setNumberPaniers($numberPaniers) {
         $this->numberPaniers = $numberPaniers;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function isLoggedIn() {
+        return ($this->id > 0);
     }
 
     public function __toString() {

@@ -53,7 +53,7 @@ class Aum_Client_Http extends Aum_Client_Abstract {
         $this->httpClient->resetParameters();
         $response = $this->sendRequest($pageUri, Zend_Http_Client::GET);
         if (!$response->isSuccessful())
-            return null;
+            throw new Exception($response->getMessage());
         return $response->getBody();
     }
 
@@ -66,16 +66,32 @@ class Aum_Client_Http extends Aum_Client_Abstract {
     /**
      * @param Aum_Model_User $user
      */
-    public function login(Aum_Model_User $user) {
+    public function login(Aum_Model_User &$user) {
         $this->user = $user;
         $this->httpClient->resetParameters(true);
-        $this->httpClient->setParameterPost('login', $this->user->getEmail());
-        $this->httpClient->setParameterPost('password', $this->user->getPassword());
-        $this->httpClient->setParameterPost('x_1', '1');
-        $this->httpClient->setParameterPost('y_1', '1');
-        $this->httpClient->setParameterPost('remember', 'true');
+        $this->httpClient->setParameterPost(
+                $this->config->aum->paramKey->login->login,
+                $this->user->getEmail());
+        $this->httpClient->setParameterPost(
+                $this->config->aum->paramKey->login->password,
+                $this->user->getPassword());
+        $this->httpClient->setParameterPost(
+                $this->config->aum->paramKey->login->submit,
+                $this->config->aum->paramKey->login->submitValue);
+        $this->httpClient->setParameterPost(
+                $this->config->aum->paramKey->login->remember,
+                $this->config->aum->paramKey->login->rememberValue);
         $response = $this->sendRequest($this->config->aum->link->action->{__FUNCTION__}, Zend_Http_Client::POST);
-        return $response->isSuccessful();
+        if (!$response->isSuccessful())
+            throw new Exception ($response->getMessage());
+        $cookies = $this->httpClient->getCookieJar()->getAllCookies();
+        if (is_array($cookies))
+            foreach ($cookies as $cookie)
+                if ($cookie->getName() == $this->config->aum->paramKey->cookie->id && is_numeric($cookie->getValue())) {
+                    $user->setId($cookie->getValue());
+                    break ;
+                }
+        return $user->isLoggedIn();
     }
 
     /**
@@ -160,9 +176,9 @@ class Aum_Client_Http extends Aum_Client_Abstract {
         $uri = $this->config->aum->link->action->{__FUNCTION__};
         $uri = sprintf($uri, $destinationAumId);
         $this->httpClient->resetParameters();
-        $this->httpClient->setParameterPost('message', $message);
-        $this->httpClient->setParameterPost('x_1', '1');
-        $this->httpClient->setParameterPost('y_1', '1');
+        $this->httpClient->setParameterPost($this->config->aum->paramKey->thread->message, $message);
+        $this->httpClient->setParameterPost($this->config->aum->paramKey->thread->submit,
+                $this->config->aum->paramKey->thread->submitValue);
         $response = $this->sendRequest($uri, Zend_Http_Client::POST);
         return $response->isSuccessful();
     }
