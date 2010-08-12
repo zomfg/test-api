@@ -35,12 +35,21 @@ class TestController extends Zend_Controller_Action {
     }
     
     public function xmlAction() {
+        $start = microtime(true);
         $factory = new Aum_Factory_NewCharm();
         $page = $factory->createPage();
         $parser = $factory->createParser();
-        $page->setHtmlBody(file_get_contents(APPLICATION_PATH . '/../tests/static/basket.xml'));
-
+        //$page->setHtmlBody(file_get_contents(APPLICATION_PATH . '/../tests/static/basket.xml.php2.html'));
+        $fuck = fopen('http://www.adopteunmec.com/', 'r');
+        $page->setHtmlBody(fread($fuck, 33554432/2));
+        echo $page->getHtmlBody();
+        /*
         $page->parse($parser);
+
+        $guys = $page->getGuys();
+        echo 'city= ' . $guys[0]->getCity(). 'fock<br/>';*/
+        $end = microtime(true);
+        echo 'It took ' . ($end - $start) . ' seconds';
     }
 
     public function charmsAction() {
