@@ -11,7 +11,7 @@
  */
 class Aum_Page_Basket_Girl extends Aum_Page_Abstract {
 
-    private $products = array();
+    private $people = array();
     private $contacts = array();
     
     public function __construct() {
@@ -19,11 +19,11 @@ class Aum_Page_Basket_Girl extends Aum_Page_Abstract {
     }
     
     public function getProducts() {
-        return $this->products;
+        return $this->people;
     }
 
     public function addProduct(Aum_Model_MiniProfile $product){
-        array_push($this->products, $product);
+        array_push($this->people, $product);
     }
 
     public function getContacts() {

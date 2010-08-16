@@ -88,9 +88,9 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         $computedSignature = Zend_Crypt_Hmac::compute(
                 $this->config->api->security->privateKey,
                 $this->config->api->security->algorithm, $data);
-        Zend_Debug::dump($data);
-        Zend_Debug::dump($receivedSignature);
-        Zend_Debug::dump($computedSignature);
+        //Zend_Debug::dump($data);
+        //Zend_Debug::dump($receivedSignature);
+        //Zend_Debug::dump($computedSignature);
         if ($computedSignature == $receivedSignature) {
             $this->aumUser = new Aum_Model_User($login, $password);
             $this->authenticated = true;

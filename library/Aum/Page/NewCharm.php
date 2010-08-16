@@ -10,7 +10,7 @@
  * @author dirk
  */
 class Aum_Page_NewCharm  extends Aum_Page_Abstract {
-    private $guys = array();
+    private $people = array();
     
     public function __construct() {
         $this->configPageKey = 'newCharm';
@@ -24,11 +24,11 @@ class Aum_Page_NewCharm  extends Aum_Page_Abstract {
     }
 
     public function addGuy(Aum_Model_MiniProfile $guy){
-        array_push($this->guys, $guy);
+        array_push($this->people, $guy);
     }
 
     public function getGuys(){
-        return $this->guys;
+        return $this->people;
     }
 
     public function toArray() {

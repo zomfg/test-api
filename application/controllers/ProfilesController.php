@@ -22,7 +22,6 @@ class ProfilesController extends Aum_Controller_Base {
             $response = $this->getPage(new Aum_Factory_Profile_Girl($aumId));
         else
             $response = $this->getPage(new Aum_Factory_Profile_Boy($aumId));
-        var_dump($response->toArray());
         $this->setApiResponse($response);
     }
 
