@@ -9,7 +9,7 @@ class BasketsController extends Aum_Controller_Base
 
     public function indexAction()
     {
-        $this->_forward('list');
+        $this->listAction();
     }
 
     public function listAction() {

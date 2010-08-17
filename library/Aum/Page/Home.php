@@ -33,15 +33,15 @@ class Aum_Page_Home extends Aum_Page_Abstract {
     /**
      * @var Aum_Page_Profile_Abstract
      */
-    private $lastVisitProfile;
+    private $lastVisitProfile = null;
     /**
      * @var Aum_Page_Profile_Abstract
      */
-    private $lastBasketProfile;
+    private $lastBasketProfile = null;
     /**
      * @var Aum_Page_Profile_Abstract
      */
-    private $lastMailProfile;
+    private $lastMailProfile = null;
 
     public function __construct() {
         $this->configPageKey = 'home';

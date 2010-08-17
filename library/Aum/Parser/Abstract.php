@@ -23,11 +23,10 @@ abstract class Aum_Parser_Abstract implements Aum_Parser_Interface {
             $string = utf8_decode($string);
         else if ($utf8 == 2)
             $string = utf8_encode($string);
-        $string = strip_tags($string);
-        $string = trim($string);
-        $string = preg_replace('/ +/', ' ', $string);
-        $string = str_replace(array('&#39;', '&nbsp;', "?", "?"), array("'", " ", "'", '-'), $string);
         $string = html_entity_decode($string);
+        $string = strip_tags($string);
+        $string = str_replace(array('&#39;', '&nbsp;', "‘", "’", "-"), array("'", " ", "'", "'", '-'), $string);
+        $string = preg_replace('/ +/', ' ', $string);
         return (trim($string));
     }
 }

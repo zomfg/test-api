@@ -16,12 +16,12 @@ class Aum_Model_User extends Aum_Abstract {
     /**
      * @var string
      */
-    private $email      = null;
+    private $email      = '';
 
     /**
      * @var string
      */
-    private $password   = null;
+    private $password   = '';
 
     /**
      * @var integer

@@ -4,7 +4,7 @@
  *
  * @author Sergio
  */
-class Aum_Controller_Base extends Zend_Controller_Action {
+abstract class Aum_Controller_Base extends Zend_Controller_Action {
     /**
      * @var Aum_Client_Abstract
      */
@@ -16,11 +16,6 @@ class Aum_Controller_Base extends Zend_Controller_Action {
     protected $config = null;
 
     /**
-     * @var bool
-     */
-    private $authenticated = false;
-
-    /**
      * @var integer
      */
     protected $httpErrorCode = 500;
@@ -30,20 +25,26 @@ class Aum_Controller_Base extends Zend_Controller_Action {
      */
     protected $aumUser = null;
 
-    public function init() {
+    public function init()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $this->httpRequest = new Zend_Controller_Request_Http();
         $this->config = Aum_Config::get();
-        $this->authenticate();
         $this->aumClient = new Aum_Client_Http($this->config);
-        if ($this->isAuthenticated()) {
+        $this->authenticate();
+    }
+
+    public function authenticate() {
+        if ($this->createAumUser()) {
             try {
                 if (!$this->aumClient->login($this->aumUser))
                     $this->httpError(403);
             }
             catch (Exception $e) {$this->httpError(500);}
         }
-        else
+        else {
             $this->httpError(401);
-        return parent::init();
+        }
     }
 
     protected function initContexts(array $actions = array()) {
@@ -53,12 +54,11 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         if (!is_array($contexts) || count($contexts) < 1)
             return ;
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
-        //$contextSwitch->addContext('plist', array('suffix' => 'plist', 'headers' => array('Content-Type' => 'application/xml')));
+//        //$contextSwitch->addContext('plist', array('suffix' => 'plist.phtml', 'headers' => array('Content-Type' => 'application/xml')));
         $actionContexts = array();
         foreach ($actions as $action)
             $actionContexts[$action] = $contexts;
         $contextSwitch->addActionContexts($actionContexts);
-        //$contextSwitch->setAutoJsonSerialization(false);
         $contextSwitch->initContext();
     }
 
@@ -66,50 +66,33 @@ class Aum_Controller_Base extends Zend_Controller_Action {
         $this->view->sap = array(__FUNCTION__, $this->getRequest()->getParams());
     }
 
-    protected function authenticate() {
-        if (!($receivedSignature = $this->getRequest()->getParam($this->config->api->paramKey->auth)))
-            return false;
+    private function createAumUser() {
         if (!($login = $this->getRequest()->getParam($this->config->api->paramKey->login)))
             return false;
         if (!($password = $this->getRequest()->getParam($this->config->api->paramKey->password)))
             return false;
-        $skipParams = array(
-            $this->getRequest()->getActionKey(),
-            $this->getRequest()->getControllerKey(),
-            $this->getRequest()->getModuleKey(),
-            $this->config->api->paramKey->auth
-        );
-        $params = $this->getRequest()->getParams();
-        ksort($params);
-        $data = null;
-        foreach ($params as $k => $v)
-            if (!in_array($k, $skipParams))
-                $data .= '&'.$k.'='.$v;
-        $computedSignature = Zend_Crypt_Hmac::compute(
-                $this->config->api->security->privateKey,
-                $this->config->api->security->algorithm, $data);
-        Zend_Debug::dump($data);
-        Zend_Debug::dump($receivedSignature);
-        Zend_Debug::dump($computedSignature);
-        if ($computedSignature == $receivedSignature) {
-            $this->aumUser = new Aum_Model_User($login, $password);
-            $this->authenticated = true;
-        }
-        return $this->authenticated;
-    }
-
-    protected function isAuthenticated() {
-        return $this->authenticated;
+        $this->aumUser = new Aum_Model_User($login, $password);
+        return true;
     }
 
     protected function httpError($errorCode = 500) {
         $this->httpErrorCode = $errorCode;
-        $this->_forward('error');
+        $this->getResponse()->setHttpResponseCode($this->httpErrorCode);
+        $this->errorAction();
     }
 
     public function errorAction() {
         $this->_helper->viewRenderer->setNoRender();
-        $this->getResponse()->setHttpResponseCode($this->httpErrorCode);
+    }
+
+    public function __call($method, $args)
+    {
+        if ('Action' == substr($method, -6))
+            return $this->httpError(501);
+        throw new Exception('Invalid method "'
+                            . $method
+                            . '" called',
+                            500);
     }
 
     /**
@@ -136,6 +119,28 @@ class Aum_Controller_Base extends Zend_Controller_Action {
      */
     protected function setApiResponse(Aum_Response $response) {
         $this->view->response = $response->toArray();
+    }
+
+    public function postXmlContext() {
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $view = $viewRenderer->view;
+        if ($view instanceof Zend_View_Interface) {
+            if(method_exists($view, 'getVars')) {
+                $vars = Zend_Json::encode($view->getVars());
+                $this->getResponse()->setBody($vars);
+            } else {
+                throw new Zend_Controller_Action_Exception('View does not implement the getVars() method needed to encode the view into JSON');
+            }
+        }
+    }
+
+    public function initXmlContext()
+    {
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $view = $viewRenderer->view;
+        if ($view instanceof Zend_View_Interface) {
+            $viewRenderer->setNoRender(true);
+        }
     }
 }
 ?>

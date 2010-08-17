@@ -11,19 +11,18 @@
  */
 class Aum_Page_Basket_Boy extends Aum_Page_Abstract {
 
-    private $girls = array();
+    private $people = array();
 
     public function __construct() {
         $this->configPageKey = 'basket';
     }
 
     public function getGirls() {
-        return $this->girls;
+        return $this->people;
     }
 
     public function addVisitor(Aum_Model_MiniProfile $product){
-        array_push($this->girls, $product);
-        echo "added";
+        array_push($this->people, $product);
     }
 
     public function toArray() {

@@ -7,11 +7,7 @@ class MessagesController extends Aum_Controller_Base {
     }
 
     public function indexAction() {
-        $this->_forward('list');
-    }
-
-    public function testAction() {
-        $this->test();
+        $this->listAction();
     }
 
     public function sendAction() {
