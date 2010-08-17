@@ -11,7 +11,7 @@ class CharmsController extends Aum_Controller_Base {
     }
 
     public function indexAction() {
-        $this->listAction();
+        $this->listNewAction();
     }
 
     public function acceptAction() {
