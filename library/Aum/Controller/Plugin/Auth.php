@@ -17,7 +17,7 @@ class Aum_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract {
         //echo "PLUGIN SPEAKIN\n";
         $this->config = Aum_Config::get();
         if (!($receivedSignature = $request->getHeader($this->config->api->paramKey->auth)))
-            return $this->error(401);
+            return $this->error(Aum_Response::STATUS_CODE_BAD_SIGNATURE);
         $skipParams = array(
             $request->getActionKey(),
             $request->getControllerKey(),
@@ -27,14 +27,15 @@ class Aum_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract {
         ksort($params);
         $data = null;
         foreach ($params as $k => $v)
-            if (!in_array($k, $skipParams))
+            if (is_string($v) && !in_array($k, $skipParams))
                 $data .= '&'.$k.'='.$v;
         $computedSignature = Zend_Crypt_Hmac::compute(
                 $this->config->api->security->privateKey,
                 $this->config->api->security->algorithm, $data);
-        //Zend_Debug::dump($computedSignature);
+//        Zend_Debug::dump($receivedSignature);
+//        Zend_Debug::dump($computedSignature);
         if ($computedSignature != $receivedSignature)
-            return $this->error(401);
+            return $this->error(Aum_Response::STATUS_CODE_BAD_SIGNATURE);
     }
 
     private function error($code) {

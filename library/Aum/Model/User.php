@@ -10,9 +10,9 @@ class Aum_Model_User extends Aum_Abstract {
     const SEX_UNKNOWN = 3;
 
     /**
-     * @var integer
+     * @var string
      */
-    private $id         = 0;
+    private $aumId      = '';
     /**
      * @var string
      */
@@ -98,15 +98,15 @@ class Aum_Model_User extends Aum_Abstract {
     }
 
     public function getId() {
-        return $this->id;
+        return $this->aumId;
     }
 
     public function setId($id) {
-        $this->id = $id;
+        $this->aumId = $id;
     }
 
     public function isLoggedIn() {
-        return ($this->id > 0);
+        return ($this->aumId > 0);
     }
 
     public static function getSex($aumId) {
@@ -120,7 +120,7 @@ class Aum_Model_User extends Aum_Abstract {
     public function canInteractWith($aumId) {
         if (($targetSex = self::getSex($aumId)) == self::SEX_UNKNOWN)
             return false;
-        if (($sourceSex = self::getSex($this->id)) == self::SEX_UNKNOWN)
+        if (($sourceSex = self::getSex($this->aumId)) == self::SEX_UNKNOWN)
             return false;
         return ($targetSex != $sourceSex);
     }

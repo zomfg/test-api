@@ -13,7 +13,7 @@ class Aum_Model_MiniProfile extends Aum_Abstract {
     /**
      * @var integer
      */
-    private $aumId = 0;
+    private $aumId = '';
 
     /**
      * @var string
@@ -36,9 +36,9 @@ class Aum_Model_MiniProfile extends Aum_Abstract {
     private $city = '';
 
     /**
-     * @var integer
+     * @var string
      */
-    private $age = 0;
+    private $age = '';
 
     /**
      * @param integer $aumId

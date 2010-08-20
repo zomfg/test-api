@@ -38,12 +38,12 @@ abstract class Aum_Controller_Base extends Zend_Controller_Action {
         if ($this->createAumUser()) {
             try {
                 if (!$this->aumClient->login($this->aumUser))
-                    $this->httpError(403);
+                    $this->httpError(Aum_Response::STATUS_CODE_CANT_LOGIN);
             }
-            catch (Exception $e) {$this->httpError(500);}
+            catch (Exception $e) {$this->httpError(Aum_Response::STATUS_CODE_ERROR_AUM);}
         }
         else {
-            $this->httpError(401);
+            $this->httpError(Aum_Response::STATUS_CODE_BAD_SIGNATURE);
         }
     }
 
@@ -75,24 +75,21 @@ abstract class Aum_Controller_Base extends Zend_Controller_Action {
         return true;
     }
 
-    protected function httpError($errorCode = 500) {
+    protected function httpError($errorCode = Aum_Response::STATUS_CODE_ERROR_INTERNAL) {
         $this->httpErrorCode = $errorCode;
         $this->getResponse()->setHttpResponseCode($this->httpErrorCode);
-        $this->errorAction();
-    }
-
-    public function errorAction() {
-        $this->_helper->viewRenderer->setNoRender();
+        header("HTTP/1.0 ".$this->httpErrorCode." Fail", true, $this->httpErrorCode);
+        die('');
     }
 
     public function __call($method, $args)
     {
         if ('Action' == substr($method, -6))
-            return $this->httpError(501);
+            return $this->httpError(Aum_Response::STATUS_CODE_NOT_IMPLEMENTED);
         throw new Exception('Invalid method "'
                             . $method
                             . '" called',
-                            500);
+                            Aum_Response::STATUS_CODE_ERROR_INTERNAL);
     }
 
     /**
@@ -109,7 +106,7 @@ abstract class Aum_Controller_Base extends Zend_Controller_Action {
         }
         catch (Exception $e) {
             $response->setMessage($e->getMessage());
-            $this->httpError(500);
+            $this->httpError(Aum_Response::STATUS_CODE_ERROR_AUM);
         }
         return $response;
     }

@@ -17,7 +17,7 @@ class ProfilesController extends Aum_Controller_Base {
     public function visitAction() {
         $aumId = $this->getRequest()->getParam($this->config->api->paramKey->aumId);
         if (!$aumId || !is_numeric($aumId))
-            return $this->httpError(400);
+            return $this->httpError(Aum_Response::STATUS_CODE_BAD_REQUEST);
         if (Aum_Model_User::getSex($aumId) == Aum_Model_User::SEX_FEMALE)
             $response = $this->getPage(new Aum_Factory_Profile_Girl($aumId));
         else
@@ -28,21 +28,21 @@ class ProfilesController extends Aum_Controller_Base {
     public function blockAction() {
         $aumId = $this->getRequest()->getParam($this->config->api->paramKey->aumId);
         if (!$aumId || !is_numeric($aumId))
-            return $this->httpError(400);
+            return $this->httpError(Aum_Response::STATUS_CODE_BAD_REQUEST);
         if (!$this->aumUser->canInteractWith($aumId))
-            return $this->httpError(405);
+            return $this->httpError(Aum_Response::STATUS_CODE_NOT_ALLOWED);
         if (!$this->aumClient->blockMember($aumId))
-            $this->httpError();
+            $this->httpError(Aum_Response::STATUS_CODE_ERROR_AUM);
     }
 
     public function reportAction() {
         $aumId = $this->getRequest()->getParam($this->config->api->paramKey->aumId);
         if (!$aumId || !is_numeric($aumId))
-            return $this->httpError(400);
+            return $this->httpError(Aum_Response::STATUS_CODE_BAD_REQUEST);
         if (!$this->aumUser->canInteractWith($aumId))
-            return $this->httpError(405);
+            return $this->httpError(Aum_Response::STATUS_CODE_NOT_ALLOWED);
         if (!$this->aumClient->alertBoulayz($aumId))
-            $this->httpError();
+            $this->httpError(Aum_Response::STATUS_CODE_ERROR_AUM);
     }
 }
 ?>

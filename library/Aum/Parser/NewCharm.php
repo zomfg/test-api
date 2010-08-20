@@ -21,15 +21,15 @@ class Aum_Parser_NewCharm extends Aum_Parser_Abstract {
 
         foreach ($guys->albuminfo as $guy) {
             $thumb = $this->sanitize($guy->artLocation);
-            $name = $this->sanitize($guy->artist);
+            $name = $this->sanitize($guy->artist, 1);
             $online = false;
             if (strstr($name, ' (online)')) {
                 $online = true;
                 $name = str_replace(' (online)', '', $name);
             }
             $cityAge = explode(',', $guy->albumName);
-            $city = $this->sanitize($cityAge[0]);
-            $age = $this->sanitize($cityAge[1]);
+            $city = $this->sanitize($cityAge[0], 0);
+            $age = $this->sanitize($cityAge[1], 0);
             $id = $this->sanitize($guy->id);
 
             //echo $cityAge .  '<br>';

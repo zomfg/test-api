@@ -17,27 +17,27 @@ class CharmsController extends Aum_Controller_Base {
     public function acceptAction() {
         $aumId = $this->getRequest()->getParam($this->config->api->paramKey->aumId);
         if (!$aumId || !is_numeric($aumId))
-            return $this->httpError(400);
+            return $this->httpError(Aum_Response::STATUS_CODE_BAD_REQUEST);
         if (!$this->aumClient->acceptCharm($aumId))
-            $this->httpError();
+            $this->httpError(Aum_Response::STATUS_CODE_ERROR_AUM);
     }
 
     public function refuseAction() {
         $aumId = $this->getRequest()->getParam($this->config->api->paramKey->aumId);
         if (!$aumId || !is_numeric($aumId))
-            return $this->httpError(400);
+            return $this->httpError(Aum_Response::STATUS_CODE_BAD_REQUEST);
         if (!$this->aumClient->refuseCharm($aumId))
-            $this->httpError();
+            $this->httpError(Aum_Response::STATUS_CODE_ERROR_AUM);
     }
 
     public function launchAction() {
         $aumId = $this->getRequest()->getParam($this->config->api->paramKey->aumId);
         if (!$aumId || !is_numeric($aumId))
-            return $this->httpError(400);
+            return $this->httpError(Aum_Response::STATUS_CODE_BAD_REQUEST);
         if (!$this->aumUser->canInteractWith($aumId))
-            return $this->httpError(405);
+            return $this->httpError(Aum_Response::STATUS_CODE_NOT_ALLOWED);
         if (!$this->aumClient->addToFavorites($aumId))
-            $this->httpError();
+            $this->httpError(Aum_Response::STATUS_CODE_ERROR_AUM);
     }
 
     public function listAction() {
