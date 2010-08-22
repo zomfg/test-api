@@ -13,7 +13,7 @@ class Aum_Page_Mail extends Aum_Page_Abstract{
     /**
      * @var array
      */
-    private $visitorThreads = array();
+    private $threads = array();
 
     public function __construct() {
         $this->configPageKey = 'mail';
@@ -23,14 +23,14 @@ class Aum_Page_Mail extends Aum_Page_Abstract{
      * @return array
      */
     public function getThreads() {
-        return $this->visitorThreads;
+        return $this->threads;
     }
 
     /**
      * @param Aum_Model_Mail $mail
      */
     public function addThread(Aum_Model_Mail $mail) {
-        array_push($this->visitorThreads, $mail);
+        array_push($this->threads, $mail);
     }
 
     public function toArray() {
