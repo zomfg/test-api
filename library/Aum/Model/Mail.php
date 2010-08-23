@@ -5,6 +5,11 @@
  * @author Sergio
  */
 class Aum_Model_Mail extends Aum_Abstract {
+    const MAIL_STATUS_READ      = '0'; // "lu"
+    const MAIL_STATUS_ANSWERED  = '1'; // "repondu"
+    const MAIL_STATUS_NEW       = '2'; // "nouveau"
+    const MAIL_STATUS_UNKNOWN   = '3'; // just in case
+
     /**
      * @var string lu|nouveau
      */
@@ -80,6 +85,20 @@ class Aum_Model_Mail extends Aum_Abstract {
 
     public function  toArray() {
         return parent::filterArray(get_object_vars($this));
+    }
+
+    /**
+     * @param string $literalStatus
+     * @return string
+     */
+    public static function determineStatus($literalStatus) {
+        if ($literalStatus == 'lu')
+            return self::MAIL_STATUS_READ;
+        if ($literalStatus == 'repondu')
+            return self::MAIL_STATUS_ANSWERED;
+        if ($literalStatus == 'nouveau')
+            return self::MAIL_STATUS_NEW;
+        return self::MAIL_STATUS_UNKNOWN;
     }
 }
 ?>

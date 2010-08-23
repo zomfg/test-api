@@ -58,12 +58,12 @@ class Aum_Parser_Mail extends Aum_Parser_Abstract{
         $preview = $this->sanitize($subjectTime[0]);
         $time = $this->sanitize($subjectTime[1]);
 
-        $status = $this->sanitize($mail->find('td[class=a]', 4)->plaintext);
+        $literalStatus = $this->sanitize($mail->find('td[width=100]', 0)->plaintext);
 
         $newMail = new Aum_Model_Mail(
-                new Aum_Model_MiniProfile($aumId, $name, $age, $city, $pic, null),
+                new Aum_Model_MiniProfile($aumId, $name, $age, $city, $pic, false),
                 $threadId,
-                $status,
+                Aum_Model_Mail::determineStatus($literalStatus),
                 $preview,
                 $time);
         $aumPage->addThread($newMail);

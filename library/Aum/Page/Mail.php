@@ -9,7 +9,7 @@
  *
  * @author dirk
  */
-class Aum_Page_Mail extends Aum_Page_Abstract{
+class Aum_Page_Mail extends Aum_Page_Abstract {
     /**
      * @var array
      */

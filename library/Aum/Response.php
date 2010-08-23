@@ -5,14 +5,14 @@
  * @author Sergio
  */
 class Aum_Response extends Aum_Abstract {
-    const STATUS_CODE_SUCCUSS = 200;
-    const STATUS_CODE_BAD_REQUEST = 400;
+    const STATUS_CODE_SUCCUSS       = 200;
+    const STATUS_CODE_BAD_REQUEST   = 400;
     const STATUS_CODE_BAD_SIGNATURE = 417;
-    const STATUS_CODE_CANT_LOGIN = 403;
-    const STATUS_CODE_NOT_ALLOWED = 405;
-    const STATUS_CODE_ERROR_INTERNAL = 500;
+    const STATUS_CODE_CANT_LOGIN    = 403;
+    const STATUS_CODE_NOT_ALLOWED   = 405;
+    const STATUS_CODE_ERROR_INTERNAL= 500;
     const STATUS_CODE_NOT_IMPLEMENTED = 501;
-    const STATUS_CODE_ERROR_AUM = 503;
+    const STATUS_CODE_ERROR_AUM     = 503;
 
     /**
      * @var Zend_Config
@@ -33,6 +33,11 @@ class Aum_Response extends Aum_Abstract {
      * @var array
      */
     private $extra = null;
+
+    /**
+     * @var array
+     */
+    private $apiconfig = null;
 
     public function __construct(Zend_Config $config = null) {
         $this->config = $config;
@@ -77,6 +82,15 @@ class Aum_Response extends Aum_Abstract {
         else if (is_array($extra))
             $this->extra = $extra;
     }
+
+    public function getApiconfig() {
+        return $this->apiconfig;
+    }
+
+    public function setApiconfig($apiconfig) {
+        $this->apiconfig = $apiconfig;
+    }
+
     /**
      * @param array $response
      * @param Zend_Config $config

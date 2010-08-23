@@ -24,9 +24,9 @@ abstract class Aum_Parser_Abstract implements Aum_Parser_Interface {
         else if ($utf8 == 2)
             $string = utf8_encode($string);
 
+        $string = str_replace(array('&#39;', '&nbsp;', "‘", "’", "-"), array("'", " ", "'", "'", '-'), $string);
         $string = html_entity_decode($string);
         $string = strip_tags($string);
-        $string = str_replace(array('&#39;', '&nbsp;', "‘", "’", "-"), array("'", " ", "'", "'", '-'), $string);
         $string = preg_replace('/ +/', ' ', $string);
         return (trim($string));
     }

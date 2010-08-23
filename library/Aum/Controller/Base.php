@@ -115,29 +115,13 @@ abstract class Aum_Controller_Base extends Zend_Controller_Action {
      * @param Aum_Response $response
      */
     protected function setApiResponse(Aum_Response $response) {
+        $remoteApiConfigVersion = $this->getRequest()->getParam($this->config->api->paramKey->remoteApiConfigVersion);
+        if ($remoteApiConfigVersion != null) {
+            $config = Aum_Config::getRemote();
+            if ($config->version > $remoteApiConfigVersion)
+                $response->setApiconfig($config->toArray());
+        }
         $this->view->response = $response->toArray();
-    }
-
-    public function postXmlContext() {
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        $view = $viewRenderer->view;
-        if ($view instanceof Zend_View_Interface) {
-            if(method_exists($view, 'getVars')) {
-                $vars = Zend_Json::encode($view->getVars());
-                $this->getResponse()->setBody($vars);
-            } else {
-                throw new Zend_Controller_Action_Exception('View does not implement the getVars() method needed to encode the view into JSON');
-            }
-        }
-    }
-
-    public function initXmlContext()
-    {
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        $view = $viewRenderer->view;
-        if ($view instanceof Zend_View_Interface) {
-            $viewRenderer->setNoRender(true);
-        }
     }
 }
 ?>
